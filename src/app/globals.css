@@ -1,0 +1,221 @@
+@import "tailwindcss";
+
+:root {
+  --cream: #fff8ea;
+  --paper: #fffdf6;
+  --ink: #4a3427;
+  --ink-soft: #7a6152;
+  --yellow: #ffd45c;
+  --yellow-d: #e9a92a;
+  --pink: #f7a8b8;
+  --pink-d: #d9707f;
+  --green: #a9dc8a;
+  --green-d: #63a94a;
+  --blue: #a8d8f5;
+  --blue-d: #4c9bd0;
+  --orange: #ffb877;
+  --orange-d: #e07f3a;
+  --font-scale: 1;
+}
+
+html,
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+}
+
+body {
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(255, 212, 92, 0.18) 0 60px, transparent 61px),
+    radial-gradient(circle at 88% 70%, rgba(169, 220, 138, 0.18) 0 80px, transparent 81px),
+    radial-gradient(circle at 30% 92%, rgba(247, 168, 184, 0.16) 0 70px, transparent 71px);
+  background-attachment: fixed;
+}
+
+.app {
+  font-size: calc(17px * var(--font-scale));
+}
+.app.big-text {
+  --font-scale: 1.25;
+}
+
+.title-font {
+  font-family: "Kiwi Maru", "Zen Maru Gothic", sans-serif;
+}
+
+.emoji {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  line-height: 1;
+}
+
+/* やわらかい手描き風の枠 */
+.crayon {
+  border: 3px solid var(--ink);
+  border-radius: 22px 26px 20px 24px / 24px 20px 26px 22px;
+  box-shadow: 0 4px 0 rgba(74, 52, 39, 0.25);
+}
+
+.btn {
+  min-height: 64px;
+  touch-action: manipulation;
+  user-select: none;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.btn:active {
+  transform: translateY(3px) scale(0.98);
+  box-shadow: 0 1px 0 rgba(74, 52, 39, 0.25);
+}
+.btn:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 4px solid #2b7bd3;
+  outline-offset: 3px;
+}
+
+.tile {
+  touch-action: manipulation;
+  user-select: none;
+}
+
+/* ---------------- アニメーション（設定でOFFにできる・点滅なし） ---------------- */
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+@keyframes hop {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  30% {
+    transform: translateY(-18px) scale(1.03, 0.97);
+  }
+  60% {
+    transform: translateY(0) scale(0.98, 1.02);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(-4deg);
+  }
+  75% {
+    transform: rotate(4deg);
+  }
+}
+@keyframes float {
+  0% {
+    transform: translateY(-10%) translateX(0) rotate(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.9;
+  }
+  90% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(110%) translateX(30px) rotate(160deg);
+    opacity: 0;
+  }
+}
+@keyframes pop-in {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes chew {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(2px) scale(1.01, 0.99);
+  }
+}
+@keyframes drift {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(26px);
+  }
+}
+@keyframes spin-soft {
+  0% {
+    transform: rotate(0) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(0.9);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+.anim .bob {
+  animation: bob 3.2s ease-in-out infinite;
+}
+.anim .hop {
+  animation: hop 0.6s ease-out;
+}
+.anim .wiggle {
+  animation: wiggle 0.5s ease-in-out 2;
+}
+.anim .chew {
+  animation: chew 0.25s ease-in-out 4;
+}
+.anim .pop-in {
+  animation: pop-in 0.45s ease-out both;
+}
+.anim .floater {
+  animation: float linear infinite;
+}
+.anim .drift {
+  animation: drift 6s ease-in-out infinite alternate;
+}
+.anim .shuffle {
+  animation: spin-soft 0.6s ease-in-out;
+}
+
+.no-anim .floater {
+  display: none;
+}
+
+/* 未発見のシルエット */
+.silhouette {
+  filter: brightness(0) opacity(0.18);
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  scrollbar-width: none;
+}
+
+.safe-bottom {
+  padding-bottom: max(10px, env(safe-area-inset-bottom));
+}

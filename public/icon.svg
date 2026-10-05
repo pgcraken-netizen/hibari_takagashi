@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="110" fill="#ffd45c"/>
+  <circle cx="256" cy="300" r="200" fill="#fff8ea"/>
+  <g stroke="#5a3d2e" stroke-width="9" stroke-linejoin="round">
+    <ellipse cx="150" cy="300" rx="22" ry="28" fill="#f7d2b2"/>
+    <ellipse cx="362" cy="300" rx="22" ry="28" fill="#f7d2b2"/>
+    <path d="M256 170 C332 170 366 222 366 300 C366 372 320 410 256 410 C192 410 146 372 146 300 C146 222 180 170 256 170 Z" fill="#f7d2b2"/>
+  </g>
+  <path d="M148 300 C140 220 186 176 256 176 C328 176 372 220 364 300 C356 266 348 250 336 242 C300 230 210 230 176 244 C164 254 154 272 148 300 Z" fill="#2e2622"/>
+  <g stroke="#5a3d2e" stroke-width="9" stroke-linecap="round" fill="none">
+    <path d="M200 296 Q218 278 236 296"/>
+    <path d="M276 296 Q294 278 312 296"/>
+  </g>
+  <path d="M206 336 Q256 352 306 336 Q300 384 256 386 Q212 384 206 336 Z" fill="#a8423f" stroke="#5a3d2e" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M211 339 Q256 354 301 339 L298 352 Q256 362 214 352 Z" fill="#fff"/>
+  <ellipse cx="190" cy="340" rx="20" ry="12" fill="#f4a3a0" opacity=".6"/>
+  <ellipse cx="322" cy="340" rx="20" ry="12" fill="#f4a3a0" opacity=".6"/>
+  <g stroke="#5a3d2e" stroke-width="9" stroke-linejoin="round">
+    <path d="M128 216 C120 120 190 92 256 92 C324 92 394 120 384 216 Q256 194 128 216 Z" fill="#a07a52"/>
+    <path d="M108 220 Q256 186 404 220 Q394 250 256 246 Q118 250 108 220 Z" fill="#8a6a4a"/>
+  </g>
+  <g transform="translate(330 128)" stroke="#2e2622" stroke-width="7">
+    <ellipse cx="0" cy="0" rx="50" ry="44" fill="#e23b3b"/>
+    <path d="M0 -44 L0 44" />
+    <circle cx="0" cy="-42" r="24" fill="#2e2622"/>
+    <circle cx="-24" cy="4" r="9" fill="#2e2622" stroke="none"/>
+    <circle cx="22" cy="10" r="9" fill="#2e2622" stroke="none"/>
+    <circle cx="-14" cy="28" r="7" fill="#2e2622" stroke="none"/>
+    <circle cx="16" cy="-14" r="7" fill="#2e2622" stroke="none"/>
+  </g>
+  <g transform="translate(196 120)">
+    <circle r="16" fill="#ffd45c" stroke="#5a3d2e" stroke-width="5"/>
+    <g fill="#fff" stroke="#5a3d2e" stroke-width="4">
+      <circle cx="0" cy="-26" r="13"/><circle cx="25" cy="-8" r="13"/><circle cx="15" cy="21" r="13"/><circle cx="-15" cy="21" r="13"/><circle cx="-25" cy="-8" r="13"/>
+    </g>
+    <circle r="12" fill="#ffd45c" stroke="#5a3d2e" stroke-width="4"/>
+  </g>
+</svg>

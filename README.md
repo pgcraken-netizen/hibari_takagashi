@@ -22,6 +22,14 @@
 - おまかせは3回に1回は必ず新しい帽子（救済）
 - テーブルの食べ物を4回食べると「ごちそうさまのおれい」
 
+## 絵について
+
+- **タイトル画面**：キービジュアル（`scripts/art/keyvisual.png`）をそのまま使い、ボタンの位置にタップ領域を重ねています。
+- **高橋先生**：キービジュアルから顔と手を切り出しています（`scripts/art/extract_sensei.py`）。その上に、帽子と衣装の絵を重ねています。
+- **部屋・テーブル・ごはん・衣装・帽子（110）・アイコン**：`scripts/art/studio.html` で、クレヨンと水彩のタッチ（SVGフィルター）で描いています。モチーフには Noto Emoji のベクター（Apache-2.0）を、フェルトや水彩風に加工して使っています。
+- **書き出し**：`python3 scripts/art/render.py`（全部）／`python3 scripts/art/render.py hat_ --missing`（足りない分だけ）。先にデータを書き出しておきます：`node --experimental-strip-types scripts/art/export-data.mjs`。
+- **ほんものの先生カード**：写真2枚（`public/art/photo-*.jpg`）。同じ帽子を見つけると、そのカードがひらきます。
+
 ## 技術
 
 Next.js（App Router）／React／TypeScript／Tailwind CSS v4／PWA（manifest + service worker）／Vercel
@@ -42,7 +50,7 @@ src/components/GameApp.tsx 画面と遊びのロジック
 
 - 先生の名前・肩書き・カード文章・「先生について」の内容 → **本人・うりずんの確認**
 - 実在施設（うりずん・ひばりクリニック）をモチーフにした帽子・名称 → 利用許諾
-- 「ほんものの先生カード」の写真 → 写真の権利者・写っている人の許諾を得てから追加（現在は準備中表示）
+- キービジュアルから切り出した先生の絵、「ほんものの先生カード」の写真2枚 → 写真の撮影者や掲載元の許諾、本人の許諾
 - 声は現在ブラウザの読み上げ。本人録音ができたら `src/lib/audio.ts` の `speak` を差し替え
 
 ## 開発

@@ -1,86 +1,462 @@
 @import "tailwindcss";
 
 :root {
-  --cream: #fff8ea;
-  --paper: #fffdf6;
-  --ink: #4a3427;
-  --ink-soft: #7a6152;
-  --yellow: #ffd45c;
-  --yellow-d: #e9a92a;
-  --pink: #f7a8b8;
-  --pink-d: #d9707f;
-  --green: #a9dc8a;
-  --green-d: #63a94a;
-  --blue: #a8d8f5;
-  --blue-d: #4c9bd0;
-  --orange: #ffb877;
-  --orange-d: #e07f3a;
+  --cream: #fbf3e2;
+  --paper: #fffaf0;
+  --ink: #5a3d26;
+  --ink-soft: #8a6a52;
+  --yellow: #ffd862;
+  --pink: #f8b4c2;
+  --green: #b5df95;
+  --blue: #aed9f3;
+  --orange: #ffc48a;
   --font-scale: 1;
 }
 
 html,
 body {
-  background: var(--cream);
+  background-color: var(--cream);
+  background-image: url("/art/paper.jpg");
+  background-size: 512px 512px;
   color: var(--ink);
   font-family: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
+  font-weight: 500;
   -webkit-tap-highlight-color: transparent;
   overscroll-behavior-y: none;
-}
-
-body {
-  background-image:
-    radial-gradient(circle at 12% 18%, rgba(255, 212, 92, 0.18) 0 60px, transparent 61px),
-    radial-gradient(circle at 88% 70%, rgba(169, 220, 138, 0.18) 0 80px, transparent 81px),
-    radial-gradient(circle at 30% 92%, rgba(247, 168, 184, 0.16) 0 70px, transparent 71px);
-  background-attachment: fixed;
 }
 
 .app {
   font-size: calc(17px * var(--font-scale));
 }
 .app.big-text {
-  --font-scale: 1.25;
+  --font-scale: 1.22;
 }
 
-.title-font {
-  font-family: "Kiwi Maru", "Zen Maru Gothic", sans-serif;
+/* クレヨンの手書き文字 */
+.font-hand {
+  font-family: "Yusei Magic", "Zen Maru Gothic", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
 }
 
-.emoji {
-  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
-  line-height: 1;
+img {
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
-/* やわらかい手描き風の枠 */
-.crayon {
-  border: 3px solid var(--ink);
-  border-radius: 22px 26px 20px 24px / 24px 20px 26px 22px;
-  box-shadow: 0 4px 0 rgba(74, 52, 39, 0.25);
-}
+/* ---------- ボタン（キービジュアルのクレヨン風） ---------- */
 
 .btn {
-  min-height: 64px;
   touch-action: manipulation;
   user-select: none;
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  transition: transform 0.12s ease, filter 0.12s ease;
 }
-.btn:active {
-  transform: translateY(3px) scale(0.98);
-  box-shadow: 0 1px 0 rgba(74, 52, 39, 0.25);
+.btn:active,
+.tile:active {
+  transform: translateY(2px) scale(0.97);
 }
-.btn:focus-visible,
+.tile {
+  touch-action: manipulation;
+  user-select: none;
+  transition: transform 0.12s ease;
+}
 button:focus-visible,
 a:focus-visible {
   outline: 4px solid #2b7bd3;
   outline-offset: 3px;
 }
 
-.tile {
-  touch-action: manipulation;
-  user-select: none;
+.pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35em;
+  min-height: 68px;
+  padding: 0.2em 1em;
+  font-family: "Yusei Magic", sans-serif;
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  box-shadow:
+    inset 0 -6px 0 rgba(90, 61, 38, 0.1),
+    inset 0 5px 0 rgba(255, 255, 255, 0.6),
+    0 4px 0 rgba(90, 61, 38, 0.22);
+}
+.pill-yellow {
+  background: linear-gradient(180deg, #ffe48a, #ffd25a);
+}
+.pill-pink {
+  background: linear-gradient(180deg, #fbc6d1, #f6a9b9);
+}
+.pill-green {
+  background: linear-gradient(180deg, #c9eaae, #ade08a);
+}
+.pill-white {
+  background: #fffaf1;
 }
 
-/* ---------------- アニメーション（設定でOFFにできる・点滅なし） ---------------- */
+.circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 3px solid var(--ink);
+  box-shadow: 0 3px 0 rgba(90, 61, 38, 0.22);
+}
+.circle-white {
+  background: #fffaf1;
+}
+.circle-blue {
+  background: #e5f3fc;
+}
+
+/* 丸いボタン（キービジュアル下段の4つの丸） */
+.round-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: #fffaf1;
+  border: 3px solid var(--ink);
+  box-shadow:
+    inset 0 0 0 7px var(--ring),
+    0 4px 0 rgba(90, 61, 38, 0.22);
+  gap: 1px;
+}
+.round-pink {
+  --ring: #f8c7d0;
+}
+.round-green {
+  --ring: #cfe9b8;
+}
+.round-orange {
+  --ring: #ffd9a8;
+}
+.round-blue {
+  --ring: #c6e4f7;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 2.5px solid var(--ink);
+  background: #fffaf1;
+  font-size: 0.95em;
+}
+
+.chip-btn {
+  display: flex;
+  min-height: 54px;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 4px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 2.5px solid var(--ink);
+  background: #fffaf1;
+}
+.chip-on {
+  background: var(--green);
+}
+
+.tab-btn {
+  display: flex;
+  min-height: 70px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px 24px 18px 22px;
+  border: 3px solid var(--ink);
+  background: #fffaf1;
+  box-shadow: 0 3px 0 rgba(90, 61, 38, 0.2);
+  font-size: 0.95em;
+}
+.tab-on {
+  background: var(--yellow);
+}
+.tab-pink {
+  background: var(--pink);
+}
+
+/* ---------- 紙・額・カード ---------- */
+
+.frame {
+  border: 3.5px solid var(--ink);
+  border-radius: 22px 26px 20px 24px / 24px 20px 26px 22px;
+  overflow: hidden;
+  box-shadow: 0 5px 0 rgba(90, 61, 38, 0.22);
+  background: #fbeed5;
+}
+
+.card-paper {
+  background-color: var(--paper);
+  background-image: url("/art/paper.jpg");
+  background-size: 512px;
+  border: 3px solid var(--ink);
+  border-radius: 22px 26px 20px 24px / 24px 20px 26px 22px;
+  box-shadow: 0 4px 0 rgba(90, 61, 38, 0.2);
+}
+
+.paper-overlay {
+  background-image: url("/art/grain.jpg");
+  background-size: 300px;
+  mix-blend-mode: multiply;
+  opacity: 0.22;
+}
+
+.hat-tile {
+  display: flex;
+  aspect-ratio: 1 / 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  border: 2.5px solid var(--ink);
+  background: #fffaf1 url("/art/paper.jpg");
+  background-size: 300px;
+  box-shadow: 0 3px 0 rgba(90, 61, 38, 0.18);
+  overflow: hidden;
+}
+.tile-on {
+  background: #fff1b8;
+  box-shadow:
+    inset 0 0 0 4px var(--yellow),
+    0 3px 0 rgba(90, 61, 38, 0.18);
+}
+.tile-gift {
+  background: #ffe1bd;
+}
+
+.outfit-tile {
+  display: block;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 2.5px solid var(--ink);
+  background: #fbeed5;
+  box-shadow: 0 3px 0 rgba(90, 61, 38, 0.18);
+}
+
+.zukan-tile {
+  display: flex;
+  aspect-ratio: 1 / 0.85;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  border: 2px solid var(--ink);
+  background: #fffaf1;
+  overflow: hidden;
+  padding: 2px;
+}
+.zukan-locked {
+  border-style: dashed;
+  border-color: #b9a38c;
+  background: rgba(255, 250, 240, 0.5);
+}
+
+.season-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  border-radius: 16px;
+  border: 2.5px solid var(--ink);
+  background: #fffaf1;
+}
+
+.food-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 18px;
+  border: 2px solid rgba(90, 61, 38, 0.35);
+  background: rgba(255, 255, 255, 0.55);
+  padding: 2px 2px 4px;
+}
+
+.game-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px;
+  border: 3px solid var(--ink);
+  border-radius: 18px;
+  box-shadow: 0 4px 0 rgba(90, 61, 38, 0.22);
+  text-align: center;
+}
+.game-card-locked {
+  background: rgba(255, 250, 240, 0.6);
+  border-style: dashed;
+  border-color: #b9a38c;
+  box-shadow: none;
+}
+
+.polaroid {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 8px 10px;
+  background: #fff;
+  border: 2px solid rgba(90, 61, 38, 0.4);
+  box-shadow: 0 4px 10px rgba(90, 61, 38, 0.2);
+  text-align: center;
+}
+.polaroid-locked {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.progress {
+  height: 18px;
+  border-radius: 999px;
+  border: 2.5px solid var(--ink);
+  background: #fffaf1;
+  overflow: hidden;
+}
+.progress > div {
+  height: 100%;
+  background: repeating-linear-gradient(-45deg, #b5df95 0 10px, #a2d47e 10px 20px);
+}
+
+.badge-new {
+  border-radius: 999px;
+  background: #e2708a;
+  padding: 0 7px;
+  color: #fff;
+  font-family: "Yusei Magic", sans-serif;
+  font-size: 0.62em;
+  line-height: 1.6;
+  border: 2px solid #fff;
+}
+
+.setting-row {
+  display: flex;
+  min-height: 72px;
+  align-items: center;
+  gap: 12px;
+  padding: 0 14px;
+  border-radius: 22px;
+  border: 3px solid var(--ink);
+  background: #fffaf1;
+  box-shadow: 0 3px 0 rgba(90, 61, 38, 0.18);
+}
+.setting-on {
+  background: #e3f4d3;
+}
+.toggle {
+  display: flex;
+  height: 38px;
+  width: 78px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 3px solid var(--ink);
+  background: #e7ded3;
+  font-family: "Yusei Magic", sans-serif;
+}
+.toggle-on {
+  background: var(--yellow);
+}
+
+/* ---------- ナビ ---------- */
+
+.nav {
+  background-color: #fffaf0;
+  background-image: url("/art/paper.jpg");
+  background-size: 400px;
+  border-top: 3px solid var(--ink);
+  box-shadow: 0 -3px 10px rgba(90, 61, 38, 0.1);
+}
+.nav-btn {
+  border-radius: 18px;
+  margin: 4px 1px;
+}
+.nav-on {
+  background: var(--yellow);
+  box-shadow: inset 0 0 0 2.5px var(--ink);
+}
+
+/* ---------- 部屋 ---------- */
+
+.scene .bubble {
+  position: absolute;
+  right: 3%;
+  top: 2.5%;
+  max-width: 50%;
+  z-index: 5;
+  padding: 0.5em 0.8em;
+  background: #fff6c8;
+  border: 3px solid var(--ink);
+  border-radius: 30px 34px 28px 32px / 30px 28px 34px 30px;
+  font-family: "Yusei Magic", sans-serif;
+  font-size: 1.02em;
+  line-height: 1.35;
+  text-align: center;
+  box-shadow: 0 3px 0 rgba(90, 61, 38, 0.2);
+}
+.scene .bubble-low {
+  top: auto;
+  bottom: 4%;
+  right: 2%;
+  max-width: 46%;
+  font-size: 0.9em;
+}
+.scene .bubble-low::after {
+  display: none;
+}
+.scene .bubble::after {
+  content: "";
+  position: absolute;
+  left: 14%;
+  bottom: -16px;
+  width: 22px;
+  height: 22px;
+  background: #fff6c8;
+  border-left: 3px solid var(--ink);
+  border-bottom: 3px solid var(--ink);
+  transform: skewY(-30deg) rotate(10deg);
+  border-bottom-left-radius: 6px;
+}
+
+.food {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.food-label {
+  margin-top: -6px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: rgba(255, 250, 240, 0.92);
+  border: 2px solid rgba(90, 61, 38, 0.5);
+  font-family: "Yusei Magic", sans-serif;
+  font-size: 0.72em;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+/* ---------- タイトル ---------- */
+
+.hotspot {
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+.hotspot:active {
+  background: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.6);
+}
+.tap-hint {
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
+}
+
+.silhouette {
+  filter: brightness(0) opacity(0.14);
+}
+
+/* ---------- アニメーション（設定でOFF・点滅なし） ---------- */
 
 @keyframes bob {
   0%,
@@ -88,21 +464,21 @@ a:focus-visible {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-6px);
+    transform: translateY(-1.2%);
   }
 }
 @keyframes hop {
   0% {
-    transform: translateY(0) scale(1);
+    transform: translateY(0) rotate(0);
   }
   30% {
-    transform: translateY(-18px) scale(1.03, 0.97);
+    transform: translateY(-4%) rotate(-2deg);
   }
   60% {
-    transform: translateY(0) scale(0.98, 1.02);
+    transform: translateY(0) rotate(1.5deg);
   }
   100% {
-    transform: translateY(0) scale(1);
+    transform: translateY(0) rotate(0);
   }
 }
 @keyframes wiggle {
@@ -111,102 +487,185 @@ a:focus-visible {
     transform: rotate(0);
   }
   25% {
-    transform: rotate(-4deg);
+    transform: rotate(-5deg);
   }
   75% {
-    transform: rotate(4deg);
+    transform: rotate(5deg);
   }
 }
-@keyframes float {
+@keyframes chew {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(1%) rotate(-1.5deg);
+  }
+}
+@keyframes shuffle {
   0% {
-    transform: translateY(-10%) translateX(0) rotate(0);
-    opacity: 0;
+    transform: rotate(0) scale(1);
   }
-  10% {
-    opacity: 0.9;
+  40% {
+    transform: rotate(-10deg) scale(0.96);
   }
-  90% {
-    opacity: 0.9;
+  70% {
+    transform: rotate(8deg) scale(1.02);
   }
   100% {
-    transform: translateY(110%) translateX(30px) rotate(160deg);
-    opacity: 0;
+    transform: rotate(0) scale(1);
   }
 }
 @keyframes pop-in {
   0% {
-    transform: scale(0.6);
+    transform: scale(0.7);
     opacity: 0;
   }
   70% {
-    transform: scale(1.06);
+    transform: scale(1.05);
     opacity: 1;
   }
   100% {
     transform: scale(1);
   }
 }
-@keyframes chew {
+@keyframes fx-pop {
+  0% {
+    transform: translateY(20%) scale(0.4);
+    opacity: 0;
+  }
+  25% {
+    transform: translateY(0) scale(1.1);
+    opacity: 1;
+  }
+  80% {
+    transform: translateY(-30%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-60%) scale(0.9);
+    opacity: 0;
+  }
+}
+@keyframes fly {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  70% {
+    transform: translate(var(--dx), var(--dy)) scale(0.55);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy)) scale(0.2);
+    opacity: 0;
+  }
+}
+@keyframes food-wiggle {
   0%,
   100% {
-    transform: translateY(0) scale(1);
+    transform: rotate(0);
   }
-  50% {
-    transform: translateY(2px) scale(1.01, 0.99);
+  30% {
+    transform: rotate(-6deg) scale(1.05);
   }
-}
-@keyframes drift {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(26px);
+  60% {
+    transform: rotate(5deg);
   }
 }
-@keyframes spin-soft {
-  0% {
-    transform: rotate(0) scale(1);
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(-4deg);
   }
   50% {
-    transform: rotate(180deg) scale(0.9);
+    transform: rotate(4deg);
   }
+}
+@keyframes thumb {
+  0%,
   100% {
-    transform: rotate(360deg) scale(1);
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(-4deg) translateY(-1%);
+  }
+}
+@keyframes hint {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+@keyframes gift {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  20% {
+    transform: rotate(-8deg);
+  }
+  40% {
+    transform: rotate(8deg);
+  }
+  60% {
+    transform: rotate(0);
   }
 }
 
 .anim .bob {
-  animation: bob 3.2s ease-in-out infinite;
+  animation: bob 3.4s ease-in-out infinite;
 }
-.anim .hop {
+.anim .head.hop,
+.anim .hand.hop {
   animation: hop 0.6s ease-out;
 }
-.anim .wiggle {
+.anim .head.wiggle {
   animation: wiggle 0.5s ease-in-out 2;
 }
-.anim .chew {
-  animation: chew 0.25s ease-in-out 4;
+.anim .hand.wiggle {
+  animation: thumb 0.5s ease-in-out 2;
+}
+.anim .head.chew {
+  animation: chew 0.25s ease-in-out 5;
+}
+.anim .head.shuffle,
+.anim .hand.shuffle {
+  animation: shuffle 0.65s ease-in-out;
 }
 .anim .pop-in {
   animation: pop-in 0.45s ease-out both;
 }
-.anim .floater {
-  animation: float linear infinite;
+.fx-pop {
+  opacity: 0;
 }
-.anim .drift {
-  animation: drift 6s ease-in-out infinite alternate;
+.anim .fx-pop {
+  animation: fx-pop 1.6s ease-out both;
 }
-.anim .shuffle {
-  animation: spin-soft 0.6s ease-in-out;
+.no-anim .fx-pop {
+  opacity: 1;
 }
-
-.no-anim .floater {
+.anim .fly-to-mouth {
+  animation: fly 0.9s ease-in both;
+}
+.no-anim .fly-to-mouth {
   display: none;
 }
-
-/* 未発見のシルエット */
-.silhouette {
-  filter: brightness(0) opacity(0.18);
+.anim .food-wiggle {
+  animation: food-wiggle 0.5s ease-in-out;
+}
+.anim .item-sway {
+  animation: sway 3s ease-in-out infinite;
+  transform-origin: 50% 90%;
+}
+.anim .tap-hint {
+  animation: hint 1.6s ease-in-out infinite;
+}
+.anim .gift-bounce {
+  animation: gift 2.4s ease-in-out infinite;
 }
 
 .scrollbar-none::-webkit-scrollbar {
@@ -215,7 +674,6 @@ a:focus-visible {
 .scrollbar-none {
   scrollbar-width: none;
 }
-
 .safe-bottom {
-  padding-bottom: max(10px, env(safe-area-inset-bottom));
+  padding-bottom: max(6px, env(safe-area-inset-bottom));
 }

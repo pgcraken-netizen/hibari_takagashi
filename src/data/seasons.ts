@@ -9,7 +9,7 @@ export type SeasonInfo = {
   ground: string;
   groundDark: string;
   floaters: string[];
-  table: { emoji: string; name: string }[];
+  table: { emoji: string; name: string; art: string }[];
   greeting: string;
   things: { emoji: string; name: string }[];
 };
@@ -25,9 +25,9 @@ export const SEASONS: Record<Season, SeasonInfo> = {
     groundDark: "#9fcf6e",
     floaters: ["🌸", "🌸", "🦋", "🌼"],
     table: [
-      { emoji: "🍓", name: "いちご" },
-      { emoji: "🍱", name: "おべんとう" },
-      { emoji: "🍡", name: "おだんご" },
+      { emoji: "🍓", name: "いちご", art: "ichigo" },
+      { emoji: "🍱", name: "おべんとう", art: "bento" },
+      { emoji: "🍡", name: "おだんご", art: "dango" },
     ],
     greeting: "はるだね。おはなが、さいてるよ。",
     things: [
@@ -48,9 +48,9 @@ export const SEASONS: Record<Season, SeasonInfo> = {
     groundDark: "#72bd52",
     floaters: ["☁️", "🌻", "🎐", "✨"],
     table: [
-      { emoji: "🍉", name: "スイカ" },
-      { emoji: "🍧", name: "かきごおり" },
-      { emoji: "🍵", name: "むぎちゃ" },
+      { emoji: "🍉", name: "スイカ", art: "suika" },
+      { emoji: "🍧", name: "かきごおり", art: "kakigori" },
+      { emoji: "🍵", name: "むぎちゃ", art: "mugicha" },
     ],
     greeting: "なつだね。おみずを、のもうね。",
     things: [
@@ -71,9 +71,9 @@ export const SEASONS: Record<Season, SeasonInfo> = {
     groundDark: "#cf9f52",
     floaters: ["🍁", "🍂", "🌰", "🍁"],
     table: [
-      { emoji: "🍠", name: "やきいも" },
-      { emoji: "🌰", name: "くり" },
-      { emoji: "🍄", name: "きのこ" },
+      { emoji: "🍠", name: "やきいも", art: "yakiimo" },
+      { emoji: "🌰", name: "くり", art: "kuri" },
+      { emoji: "🍄", name: "きのこ", art: "kinoko" },
     ],
     greeting: "あきだね。はっぱが、あかいね。",
     things: [
@@ -94,9 +94,9 @@ export const SEASONS: Record<Season, SeasonInfo> = {
     groundDark: "#d6e2ef",
     floaters: ["❄️", "❄️", "✨", "❄️"],
     table: [
-      { emoji: "🍲", name: "あったかスープ" },
-      { emoji: "🍰", name: "ケーキ" },
-      { emoji: "☕", name: "あったかいのみもの" },
+      { emoji: "🍲", name: "コーンスープ", art: "soup" },
+      { emoji: "🍰", name: "ケーキ", art: "cake" },
+      { emoji: "☕", name: "ココア", art: "cocoa" },
     ],
     greeting: "ふゆだね。あったかくしてね。",
     things: [

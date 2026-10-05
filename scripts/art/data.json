@@ -1,0 +1,1881 @@
+{
+ "hats": [
+  {
+   "id": "hat_001",
+   "name": "いちご",
+   "emoji": "🍓",
+   "category": "food",
+   "rarity": 1,
+   "style": "big",
+   "voice": "いちごだね！",
+   "season": [
+    "spring"
+   ],
+   "capColor": "#a07a52"
+  },
+  {
+   "id": "hat_002",
+   "name": "りんご",
+   "emoji": "🍎",
+   "category": "food",
+   "rarity": 1,
+   "style": "big",
+   "voice": "りんご、まっか！",
+   "season": [
+    "autumn"
+   ],
+   "capColor": "#8a6a4a"
+  },
+  {
+   "id": "hat_003",
+   "name": "バナナ",
+   "emoji": "🍌",
+   "category": "food",
+   "rarity": 1,
+   "style": "cap",
+   "voice": "バナナだよ！",
+   "capColor": "#b88b5e"
+  },
+  {
+   "id": "hat_004",
+   "name": "スイカ",
+   "emoji": "🍉",
+   "category": "food",
+   "rarity": 1,
+   "style": "big",
+   "voice": "スイカ、つめたそう！",
+   "season": [
+    "summer"
+   ],
+   "capColor": "#7b8f5a"
+  },
+  {
+   "id": "hat_005",
+   "name": "みかん",
+   "emoji": "🍊",
+   "category": "food",
+   "rarity": 1,
+   "style": "big",
+   "voice": "みかん、すっぱい？",
+   "season": [
+    "winter"
+   ],
+   "capColor": "#5f7fa8"
+  },
+  {
+   "id": "hat_006",
+   "name": "ぶどう",
+   "emoji": "🍇",
+   "category": "food",
+   "rarity": 2,
+   "style": "cap",
+   "voice": "ぶどう、つぶつぶ！",
+   "season": [
+    "autumn"
+   ],
+   "capColor": "#a07a52"
+  },
+  {
+   "id": "hat_007",
+   "name": "やきいも",
+   "emoji": "🍠",
+   "category": "food",
+   "rarity": 2,
+   "style": "cap",
+   "voice": "ほっかほか！",
+   "season": [
+    "autumn",
+    "winter"
+   ],
+   "capColor": "#8a6a4a"
+  },
+  {
+   "id": "hat_008",
+   "name": "ケーキ",
+   "emoji": "🍰",
+   "category": "food",
+   "rarity": 2,
+   "style": "big",
+   "voice": "ケーキだ、やったね！",
+   "capColor": "#b88b5e"
+  },
+  {
+   "id": "hat_009",
+   "name": "おにぎり",
+   "emoji": "🍙",
+   "category": "food",
+   "rarity": 1,
+   "style": "big",
+   "voice": "おにぎり、まんまる！",
+   "capColor": "#7b8f5a"
+  },
+  {
+   "id": "hat_010",
+   "name": "ラーメン",
+   "emoji": "🍜",
+   "category": "food",
+   "rarity": 2,
+   "style": "big",
+   "voice": "ずるずる〜！",
+   "capColor": "#5f7fa8"
+  },
+  {
+   "id": "hat_011",
+   "name": "おすし",
+   "emoji": "🍣",
+   "category": "food",
+   "rarity": 3,
+   "style": "trio",
+   "voice": "おすし、ならんでる！",
+   "capColor": "#a07a52"
+  },
+  {
+   "id": "hat_012",
+   "name": "プリン",
+   "emoji": "🍮",
+   "category": "food",
+   "rarity": 2,
+   "style": "big",
+   "voice": "ぷるぷる！",
+   "capColor": "#8a6a4a"
+  },
+  {
+   "id": "hat_013",
+   "name": "ソフトクリーム",
+   "emoji": "🍦",
+   "category": "food",
+   "rarity": 2,
+   "style": "tall",
+   "voice": "ひんやり〜！",
+   "season": [
+    "summer"
+   ],
+   "capColor": "#b88b5e"
+  },
+  {
+   "id": "hat_014",
+   "name": "パン",
+   "emoji": "🍞",
+   "category": "food",
+   "rarity": 1,
+   "style": "cap",
+   "voice": "パンのいいにおい！",
+   "capColor": "#7b8f5a"
+  },
+  {
+   "id": "hat_015",
+   "name": "かきごおり",
+   "emoji": "🍧",
+   "category": "food",
+   "rarity": 2,
+   "style": "big",
+   "voice": "キーンとする！",
+   "season": [
+    "summer"
+   ],
+   "capColor": "#5f7fa8"
+  },
+  {
+   "id": "hat_016",
+   "name": "いぬ",
+   "emoji": "🐶",
+   "category": "animal",
+   "rarity": 1,
+   "style": "big",
+   "voice": "わんわん！",
+   "capColor": "#a07a52"
+  },
+  {
+   "id": "hat_017",
+   "name": "ねこ",
+   "emoji": "🐱",
+   "category": "animal",
+   "rarity": 1,
+   "style": "big",
+   "voice": "にゃーん！",
+   "capColor": "#8a6a4a"
+  },
+  {
+   "id": "hat_018",
+   "name": "うさぎ",
+   "emoji": "🐰",
+   "category": "animal",
+   "rarity": 1,
+   "style": "big",
+   "voice": "ぴょんぴょん！",
+   "capColor": "#b88b5e"
+  },
+  {
+   "id": "hat_019",
+   "name": "くま",
+   "emoji": "🐻",
+   "category": "animal",
+   "rarity": 1,
+   "style": "big",
+   "voice": "くまさんだよ！",
+   "capColor": "#7b8f5a"
+  },
+  {
+   "id": "hat_020",
+   "name": "パンダ",
+   "emoji": "🐼",
+   "category": "animal",
+   "rarity": 2,
+   "style": "big",
+   "voice": "パンダ、かわいい！",
+   "capColor": "#5f7fa8"
+  },
+  {
+   "id": "hat_021",
+   "name": "カエル",
+   "emoji": "🐸",
+   "category": "animal",
+   "rarity": 1,
+   "style": "big",
+   "voice": "けろけろ！",
+   "season": [
+    "summer"
+   ],
+   "capColor": "#a07a52"
+  },
+  {
+   "id": "hat_022",
+   "name": "てんとうむし",
+   "emoji": "🐞🌼🍀",
+   "category": "animal",
+   "rarity": 3,
+   "style": "trio",
+   "voice": "てんとうむしの帽子！ほんものみたい！",
+   "season": [
+    "spring"
+   ],
+   "capColor": "#8a6a4a"
+  },
+  {
+   "id": "hat_023",
+   "name": "ちょうちょ",
+   "emoji": "🦋",
+   "category": "animal",
+   "rarity": 2,
+   "style": "cap",
+   "voice": "ひらひら〜！",
+   "season": [
+    "spring"
+   ],
+   "capColor": "#b88b5e"
+  },
+  {
+   "id": "hat_024",
+   "name": "ハチ",
+   "emoji": "🐝🌼🐞",
+   "category": "animal",
+   "rarity": 3,
+   "style": "trio",
+   "voice": "ぶんぶん！",
+   "season": [
+    "spring"
+   ],
+   "capColor": "#7b8f5a"
+  },
+  {
+   "id": "hat_025",
+   "name": "カメ",
+   "emoji": "🐢",
+   "category": "animal",
+   "rarity": 1,
+   "style": "cap",
+   "voice": "ゆっくりいこう！",
+   "capColor": "#5f7fa8"
+  },
+  {
+   "id": "hat_026",
+   "name": "さかな",
+   "emoji": "🐟",
+   "category": "animal",
+   "rarity": 1,
+   "style": "cap",
+   "voice": "すいすい！",
+   "capColor": "#a07a52"
+  },
+  {
+   "id": "hat_027",
+   "name": "タコ",
+   "emoji": "🐙",
+   "category": "animal",
+   "rarity": 2,
+   "style": "big",
+   "voice": "うねうね〜！",
+   "capColor": "#8a6a4a"
+  },
+  {
+   "id": "hat_028",
+   "name": "きょうりゅう",
+   "emoji": "🦖",
+   "category": "animal",
+   "rarity": 3,
+   "style": "big",
+   "voice": "がおー！",
+   "capColor": "#b88b5e"
+  },
+  {
+   "id": "hat_029",
+   "name": "フクロウ",
+   "emoji": "🦉",
+   "category": "animal",
+   "rarity": 2,
+   "style": "cap",
+   "voice": "ほーほー！",
+   "capColor": "#7b8f5a"
+  },
+  {
+   "id": "hat_030",
+   "name": "ペンギン",
+   "emoji": "🐧",
+   "category": "animal",
+   "rarity": 2,
+   "style": "big",
+   "voice": "ぺたぺた！",
+   "season": [
+    "winter"
+   ],
+   "capColor": "#5f7fa8"
+  },
+  {
+   "id": "hat_031",
+   "name": "さくら",
+   "emoji": "🌸🌸🌸",
+   "category": "nature",
+   "rarity": 2,
+   "style": "trio",
+   "voice": "さくら、きれいだね！",
+   "season": [
+    "spring"
+   ],
+   "capColor": "#a07a52"
+  },
+  {
+   "id": "hat_032",
+   "name": "ひまわり",
+   "emoji": "🌻",
+   "category": "nature",
+   "rarity": 2,
+   "style": "big",
+   "voice": "おひさまみたい！",
+   "season": [
+    "summer"
+   ],
+   "capColor": "#8a6a4a"
+  },
+  {
+   "id": "hat_033",
+   "name": "もみじ",
+   "emoji": "🍁",
+   "category": "nature",
+   "rarity": 2,
+   "style": "cap",
+   "voice": "まっかなはっぱ！",
+   "season": [
+    "autumn"
+   ],
+   "capColor": "#b88b5e"
+  },
+  {
+   "id": "hat_034",
+   "name": "よつばのクローバー",
+   "emoji": "🍀",
+   "category": "nature",
+   "rarity": 3,
+   "style": "cap",
+   "voice": "しあわせのクローバー！",
+   "season": [
+    "spring"
+   ],
+   "capColor": "#7b8f5a"
+  },
+  {
+   "id": "hat_035",
+   "name": "き",
+   "emoji": "🌳",
+   "category": "nature",
+   "rarity": 1,
+   "style": "tall",
+   "voice": "おおきな木！",
+   "capColor": "#5f7fa8"
+  },
+  {
+   "id": "hat_036",
+   "name": "め",
+   "emoji": "🌱",
+   "category": "nature",
+   "rarity": 1,
+   "style": "cap",
+   "voice": "ぐんぐんのびる！",
+   "season": [
+    "spring"
+   ],
+   "capColor": "#a07a52"
+  },
+  {
+   "id": "hat_037",
+   "name": "チューリップ",
+   "emoji": "🌷",
+   "category": "nature",
+   "rarity": 1,
+   "style": "cap",
+   "voice": "チューリップ、さいた！",
+   "season": [
+    "spring"
+   ],
+   "capColor": "#8a6a4a"
+  },
+  {
+   "id": "hat_038",
+   "name": "たいよう",
+   "emoji": "☀️",
+   "category": "nature",
+   "rarity": 2,
+   "style": "big",
+   "voice": "ぽかぽか！",
+   "season": [
+    "summer"
+   ],
+   "capColor": "#b88b5e"
+  },
+  {
+   "id": "hat_039",
+   "name": "くも",
+   "emoji": "☁️",
+   "category": "nature",
+   "rarity": 1,
+   "style": "big",
+   "voice": "ふわふわ〜！",
+   "capColor": "#7b8f5a"
+  },
+  {
+   "id": "hat_040",
+   "name": "にじ",
+   "emoji": "🌈",
+   "category": "nature",
+   "rarity": 3,
+   "style": "big",
+   "voice": "にじがでたよ！",
+   "capColor": "#5f7fa8"
+  },
+  {
+   "id": "hat_041",
+   "name": "ゆき",
+   "emoji": "⛄",
+   "category": "nature",
+   "rarity": 2,
+   "style": "big",
+   "voice": "ゆきだるま！",
+   "season": [
+    "winter"
+   ],
+   "capColor": "#a07a52"
+  },
+  {
+   "id": "hat_042",
+   "name": "おつきさま",
+   "emoji": "🌙",
+   "category": "nature",
+   "rarity": 2,
+   "style": "cap",
+   "voice": "おつきさま、こんばんは！",
+   "season": [
+    "autumn"
+   ],
+   "capColor": "#8a6a4a"
+  },
+  {
+   "id": "hat_043",
+   "name": "ほし",
+   "emoji": "⭐⭐⭐",
+   "category": "nature",
+   "rarity": 2,
+   "style": "trio",
+   "voice": "きらきら！",
+   "capColor": "#b88b5e"
+  },
+  {
+   "id": "hat_044",
+   "name": "くるま",
+   "emoji": "🚗",
+   "category": "vehicle",
+   "rarity": 1,
+   "style": "cap",
+   "voice": "ぶっぶー！",
+   "capColor": "#7b8f5a"
+  },
+  {
+   "id": "hat_045",
+   "name": "きゅうきゅうしゃ",
+   "emoji": "🚑",
+   "category": "vehicle",
+   "rarity": 2,
+   "style": "cap",
+   "voice": "ピーポーピーポー！",
+   "capColor": "#5f7fa8"
+  },
+  {
+   "id": "hat_046",
+   "name": "しょうぼうしゃ",
+   "emoji": "🚒",
+   "category": "vehicle",
+   "rarity": 2,
+   "style": "cap",
+   "voice": "ウーカンカン！",
+   "capColor": "#a07a52"
+  },
+  {
+   "id": "hat_047",
+   "name": "パトカー",
+   "emoji": "🚓",
+   "category": "vehicle",
+   "rarity": 2,
+   "style": "cap",
+   "voice": "パトロールちゅう！",
+   "capColor": "#8a6a4a"
+  },
+  {
+   "id": "hat_048",
+   "name": "じてんしゃ",
+   "emoji": "🚲",
+   "category": "vehicle",
+   "rarity": 1,
+   "style": "cap",
+   "voice": "すいすいこぐよ！",
+   "capColor": "#b88b5e"
+  },
+  {
+   "id": "hat_049",
+   "name": "バス",
+   "emoji": "🚌",
+   "category": "vehicle",
+   "rarity": 1,
+   "style": "cap",
+   "voice": "バスにのろう！",
+   "capColor": "#7b8f5a"
+  },
+  {
+   "id": "hat_050",
+   "name": "でんしゃ",
+   "emoji": "🚃",
+   "category": "vehicle",
+   "rarity": 1,
+   "style": "cap",
+   "voice": "がたんごとん！",
+   "capColor": "#5f7fa8"
+  },
+  {
+   "id": "hat_051",
+   "name": "ひこうき",
+   "emoji": "✈️",
+   "category": "vehicle",
+   "rarity": 2,
+   "style": "cap",
+   "voice": "そらをとぶよ！",
+   "capColor": "#a07a52"
+  },
+  {
+   "id": "hat_052",
+   "name": "ロケット",
+   "emoji": "🚀",
+   "category": "vehicle",
+   "rarity": 4,
+   "style": "tall",
+   "voice": "うちゅうへ、しゅっぱつ！",
+   "capColor": "#8a6a4a"
+  },
+  {
+   "id": "hat_053",
+   "name": "ふね",
+   "emoji": "🚢",
+   "category": "vehicle",
+   "rarity": 2,
+   "style": "cap",
+   "voice": "ぽーっ！",
+   "capColor": "#b88b5e"
+  },
+  {
+   "id": "hat_054",
+   "name": "とうきょうタワー",
+   "emoji": "🗼",
+   "category": "building",
+   "rarity": 3,
+   "style": "tall",
+   "voice": "たかーい！",
+   "capColor": "#7b8f5a"
+  },
+  {
+   "id": "hat_055",
+   "name": "おおきなとりい",
+   "emoji": "⛩️",
+   "category": "building",
+   "rarity": 3,
+   "style": "big",
+   "voice": "とりいだよ！",
+   "capColor": "#5f7fa8"
+  },
+  {
+   "id": "hat_056",
+   "name": "おしろ",
+   "emoji": "🏯",
+   "category": "building",
+   "rarity": 3,
+   "style": "big",
+   "voice": "おしろのぼうし！",
+   "capColor": "#a07a52"
+  },
+  {
+   "id": "hat_057",
+   "name": "とけいとう",
+   "emoji": "🕰️",
+   "category": "building",
+   "rarity": 2,
+   "style": "big",
+   "voice": "チクタク！",
+   "capColor": "#8a6a4a"
+  },
+  {
+   "id": "hat_058",
+   "name": "びょういん",
+   "emoji": "🏥",
+   "category": "building",
+   "rarity": 2,
+   "style": "big",
+   "voice": "びょういんの帽子！",
+   "capColor": "#b88b5e"
+  },
+  {
+   "id": "hat_059",
+   "name": "おうち",
+   "emoji": "🏠",
+   "category": "building",
+   "rarity": 1,
+   "style": "big",
+   "voice": "ただいま！",
+   "capColor": "#7b8f5a"
+  },
+  {
+   "id": "hat_060",
+   "name": "うりずんのおうち",
+   "emoji": "🏡🌿",
+   "category": "building",
+   "rarity": 5,
+   "style": "big",
+   "voice": "うりずん！みんなのばしょ！",
+   "capColor": "#5f7fa8"
+  },
+  {
+   "id": "hat_061",
+   "name": "ひばりのクリニック",
+   "emoji": "🏥🐦",
+   "category": "building",
+   "rarity": 5,
+   "style": "big",
+   "voice": "ひばりクリニック、先生のびょういん！",
+   "capColor": "#a07a52"
+  },
+  {
+   "id": "hat_062",
+   "name": "クリスマス",
+   "emoji": "🎄",
+   "category": "event",
+   "rarity": 3,
+   "style": "tall",
+   "voice": "メリークリスマス！",
+   "season": [
+    "winter"
+   ],
+   "capColor": "#8a6a4a"
+  },
+  {
+   "id": "hat_063",
+   "name": "ハロウィン",
+   "emoji": "🎃",
+   "category": "event",
+   "rarity": 3,
+   "style": "big",
+   "voice": "トリック・オア・トリート！",
+   "season": [
+    "autumn"
+   ],
+   "capColor": "#b88b5e"
+  },
+  {
+   "id": "hat_064",
+   "name": "おしょうがつ",
+   "emoji": "🎍",
+   "category": "event",
+   "rarity": 3,
+   "style": "big",
+   "voice": "あけましておめでとう！",
+   "season": [
+    "winter"
+   ],
+   "capColor": "#7b8f5a"
+  },
+  {
+   "id": "hat_065",
+   "name": "せつぶん",
+   "emoji": "👹",
+   "category": "event",
+   "rarity": 3,
+   "style": "big",
+   "voice": "おにはそと！ふくはうち！",
+   "season": [
+    "winter"
+   ],
+   "capColor": "#5f7fa8"
+  },
+  {
+   "id": "hat_066",
+   "name": "ひなまつり",
+   "emoji": "🎎",
+   "category": "event",
+   "rarity": 3,
+   "style": "cap",
+   "voice": "ひなまつりだね！",
+   "season": [
+    "spring"
+   ],
+   "capColor": "#a07a52"
+  },
+  {
+   "id": "hat_067",
+   "name": "たなばた",
+   "emoji": "🎋",
+   "category": "event",
+   "rarity": 3,
+   "style": "tall",
+   "voice": "おねがいごと、なににする？",
+   "season": [
+    "summer"
+   ],
+   "capColor": "#8a6a4a"
+  },
+  {
+   "id": "hat_068",
+   "name": "なつまつり",
+   "emoji": "🏮",
+   "category": "event",
+   "rarity": 3,
+   "style": "cap",
+   "voice": "わっしょい！",
+   "season": [
+    "summer"
+   ],
+   "capColor": "#b88b5e"
+  },
+  {
+   "id": "hat_069",
+   "name": "うんどうかい",
+   "emoji": "🚩",
+   "category": "event",
+   "rarity": 2,
+   "style": "cap",
+   "voice": "よーい、どん！",
+   "season": [
+    "autumn"
+   ],
+   "capColor": "#7b8f5a"
+  },
+  {
+   "id": "hat_070",
+   "name": "おたんじょうび",
+   "emoji": "🎂",
+   "category": "event",
+   "rarity": 3,
+   "style": "big",
+   "voice": "おたんじょうび、おめでとう！",
+   "capColor": "#5f7fa8"
+  },
+  {
+   "id": "hat_071",
+   "name": "ふれあいまつり",
+   "emoji": "🎈🎈🎈",
+   "category": "event",
+   "rarity": 4,
+   "style": "trio",
+   "voice": "ふれあいまつり、たのしいね！",
+   "capColor": "#a07a52"
+  },
+  {
+   "id": "hat_072",
+   "name": "はなび",
+   "emoji": "🎆",
+   "category": "event",
+   "rarity": 3,
+   "style": "big",
+   "voice": "どーん！",
+   "season": [
+    "summer"
+   ],
+   "capColor": "#8a6a4a"
+  },
+  {
+   "id": "hat_073",
+   "name": "そつぎょうしき",
+   "emoji": "🎓",
+   "category": "event",
+   "rarity": 3,
+   "style": "cap",
+   "voice": "おめでとう！",
+   "season": [
+    "spring"
+   ],
+   "capColor": "#b88b5e"
+  },
+  {
+   "id": "hat_074",
+   "name": "おいしゃさん",
+   "emoji": "🩺",
+   "category": "job",
+   "rarity": 2,
+   "style": "cap",
+   "voice": "げんきかな？",
+   "capColor": "#7b8f5a"
+  },
+  {
+   "id": "hat_075",
+   "name": "かんごしさん",
+   "emoji": "💉",
+   "category": "job",
+   "rarity": 2,
+   "style": "cap",
+   "voice": "いつもありがとう！",
+   "capColor": "#5f7fa8"
+  },
+  {
+   "id": "hat_076",
+   "name": "しょうぼうし",
+   "emoji": "🧑‍🚒",
+   "category": "job",
+   "rarity": 2,
+   "style": "cap",
+   "voice": "しゅつどう！",
+   "capColor": "#a07a52"
+  },
+  {
+   "id": "hat_077",
+   "name": "パイロット",
+   "emoji": "👨‍✈️",
+   "category": "job",
+   "rarity": 2,
+   "style": "cap",
+   "voice": "テイクオフ！",
+   "capColor": "#8a6a4a"
+  },
+  {
+   "id": "hat_078",
+   "name": "だいくさん",
+   "emoji": "🔨",
+   "category": "job",
+   "rarity": 1,
+   "style": "cap",
+   "voice": "トントントン！",
+   "capColor": "#b88b5e"
+  },
+  {
+   "id": "hat_079",
+   "name": "パンやさん",
+   "emoji": "🥐",
+   "category": "job",
+   "rarity": 2,
+   "style": "cap",
+   "voice": "やきたてだよ！",
+   "capColor": "#7b8f5a"
+  },
+  {
+   "id": "hat_080",
+   "name": "りょうりにん",
+   "emoji": "🍳",
+   "category": "job",
+   "rarity": 2,
+   "style": "cap",
+   "voice": "ジュージュー！",
+   "capColor": "#5f7fa8"
+  },
+  {
+   "id": "hat_081",
+   "name": "がっこうのせんせい",
+   "emoji": "✏️",
+   "category": "job",
+   "rarity": 1,
+   "style": "cap",
+   "voice": "はい、あつまって〜！",
+   "capColor": "#a07a52"
+  },
+  {
+   "id": "hat_082",
+   "name": "のうかさん",
+   "emoji": "🌾",
+   "category": "job",
+   "rarity": 2,
+   "style": "cap",
+   "voice": "おこめ、そだてるよ！",
+   "season": [
+    "autumn"
+   ],
+   "capColor": "#8a6a4a"
+  },
+  {
+   "id": "hat_083",
+   "name": "アーティスト",
+   "emoji": "🎨",
+   "category": "job",
+   "rarity": 2,
+   "style": "cap",
+   "voice": "げいじゅつだ！",
+   "capColor": "#b88b5e"
+  },
+  {
+   "id": "hat_084",
+   "name": "ぎょうざ",
+   "emoji": "🥟",
+   "category": "utsunomiya",
+   "rarity": 2,
+   "style": "big",
+   "voice": "うつのみやといえば、ぎょうざ！",
+   "capColor": "#7b8f5a"
+  },
+  {
+   "id": "hat_085",
+   "name": "ぎょうざさんきょうだい",
+   "emoji": "🥟🥟🥟",
+   "category": "utsunomiya",
+   "rarity": 3,
+   "style": "trio",
+   "voice": "ぎょうざが3つ！",
+   "capColor": "#5f7fa8"
+  },
+  {
+   "id": "hat_086",
+   "name": "とちぎのいちご",
+   "emoji": "🍓🍓🍓",
+   "category": "utsunomiya",
+   "rarity": 3,
+   "style": "trio",
+   "voice": "とちぎのいちご、あまーい！",
+   "season": [
+    "spring"
+   ],
+   "capColor": "#a07a52"
+  },
+  {
+   "id": "hat_087",
+   "name": "おおやいし",
+   "emoji": "🪨",
+   "category": "utsunomiya",
+   "rarity": 3,
+   "style": "big",
+   "voice": "おおやいし、かっこいい！",
+   "capColor": "#8a6a4a"
+  },
+  {
+   "id": "hat_088",
+   "name": "ライトレール",
+   "emoji": "🚊",
+   "category": "utsunomiya",
+   "rarity": 3,
+   "style": "cap",
+   "voice": "まちをはしるでんしゃ！",
+   "capColor": "#b88b5e"
+  },
+  {
+   "id": "hat_089",
+   "name": "かんぴょう",
+   "emoji": "🧶",
+   "category": "utsunomiya",
+   "rarity": 3,
+   "style": "cap",
+   "voice": "かんぴょう、しってる？",
+   "capColor": "#7b8f5a"
+  },
+  {
+   "id": "hat_090",
+   "name": "とちぎのやま",
+   "emoji": "⛰️",
+   "category": "utsunomiya",
+   "rarity": 2,
+   "style": "big",
+   "voice": "やまがみえるね！",
+   "capColor": "#5f7fa8"
+  },
+  {
+   "id": "hat_091",
+   "name": "こうえん",
+   "emoji": "🛝",
+   "category": "utsunomiya",
+   "rarity": 2,
+   "style": "cap",
+   "voice": "こうえんであそぼう！",
+   "capColor": "#a07a52"
+  },
+  {
+   "id": "hat_092",
+   "name": "ちいきのおまつり",
+   "emoji": "🥁",
+   "category": "utsunomiya",
+   "rarity": 3,
+   "style": "cap",
+   "voice": "どんどこ！",
+   "capColor": "#8a6a4a"
+  },
+  {
+   "id": "hat_093",
+   "name": "きょだいプリン",
+   "emoji": "🍮",
+   "category": "henteko",
+   "rarity": 4,
+   "style": "tall",
+   "voice": "おおきすぎる！",
+   "capColor": "#b88b5e"
+  },
+  {
+   "id": "hat_094",
+   "name": "そらとぶぎょうざ",
+   "emoji": "🥟🪽",
+   "category": "henteko",
+   "rarity": 4,
+   "style": "big",
+   "voice": "ぎょうざが、とんでる！？",
+   "capColor": "#7b8f5a"
+  },
+  {
+   "id": "hat_095",
+   "name": "おおきすぎるねこ",
+   "emoji": "🐈",
+   "category": "henteko",
+   "rarity": 4,
+   "style": "tall",
+   "voice": "ちょっと、おもたい！",
+   "capColor": "#5f7fa8"
+  },
+  {
+   "id": "hat_096",
+   "name": "なぜかうえきばち",
+   "emoji": "🪴",
+   "category": "henteko",
+   "rarity": 3,
+   "style": "big",
+   "voice": "なぜか、うえきばち！",
+   "capColor": "#a07a52"
+  },
+  {
+   "id": "hat_097",
+   "name": "しんごうき",
+   "emoji": "🚦",
+   "category": "henteko",
+   "rarity": 3,
+   "style": "tall",
+   "voice": "あお！すすめ！",
+   "capColor": "#8a6a4a"
+  },
+  {
+   "id": "hat_098",
+   "name": "ぐるぐるとけい",
+   "emoji": "⏰",
+   "category": "henteko",
+   "rarity": 3,
+   "style": "big",
+   "voice": "ぐるぐる〜！",
+   "capColor": "#b88b5e"
+  },
+  {
+   "id": "hat_099",
+   "name": "UFO",
+   "emoji": "🛸",
+   "category": "henteko",
+   "rarity": 5,
+   "style": "big",
+   "voice": "ピコピコ…ワレワレハ…",
+   "capColor": "#7b8f5a"
+  },
+  {
+   "id": "hat_100",
+   "name": "なぞのロボット",
+   "emoji": "🤖",
+   "category": "henteko",
+   "rarity": 4,
+   "style": "big",
+   "voice": "ウィーン、ガシャン！",
+   "capColor": "#5f7fa8"
+  },
+  {
+   "id": "hat_101",
+   "name": "へんなはな",
+   "emoji": "🪻🍄🌵",
+   "category": "henteko",
+   "rarity": 4,
+   "style": "trio",
+   "voice": "これ、なんのはな？",
+   "capColor": "#a07a52"
+  },
+  {
+   "id": "hat_102",
+   "name": "なにこれ？",
+   "emoji": "🫧",
+   "category": "henteko",
+   "rarity": 5,
+   "style": "big",
+   "voice": "なにこれ〜！？",
+   "capColor": "#8a6a4a"
+  },
+  {
+   "id": "hat_103",
+   "name": "スマイル",
+   "emoji": "😊",
+   "category": "henteko",
+   "rarity": 4,
+   "style": "big",
+   "voice": "にっこり！",
+   "capColor": "#b88b5e"
+  },
+  {
+   "id": "hat_104",
+   "name": "にっこりおひさま",
+   "emoji": "🌞",
+   "category": "henteko",
+   "rarity": 4,
+   "style": "big",
+   "voice": "きょうも、にこにこ！",
+   "capColor": "#7b8f5a"
+  },
+  {
+   "id": "hat_105",
+   "name": "ふしぎなたまご",
+   "emoji": "🥚",
+   "category": "henteko",
+   "rarity": 3,
+   "style": "big",
+   "voice": "なにがうまれるかな？",
+   "capColor": "#5f7fa8"
+  },
+  {
+   "id": "hat_106",
+   "name": "ハートいっぱい",
+   "emoji": "💛💚💙",
+   "category": "henteko",
+   "rarity": 3,
+   "style": "trio",
+   "voice": "だいすき！",
+   "capColor": "#a07a52"
+  },
+  {
+   "id": "hat_107",
+   "name": "かがみもち",
+   "emoji": "🍡",
+   "category": "henteko",
+   "rarity": 3,
+   "style": "tall",
+   "voice": "おだんご、のっかった！",
+   "capColor": "#8a6a4a"
+  },
+  {
+   "id": "hat_108",
+   "name": "おばけ",
+   "emoji": "👻",
+   "category": "henteko",
+   "rarity": 3,
+   "style": "big",
+   "voice": "ばあ！",
+   "capColor": "#b88b5e"
+  },
+  {
+   "id": "hat_109",
+   "name": "まほうのぼうし",
+   "emoji": "🎩✨",
+   "category": "henteko",
+   "rarity": 5,
+   "style": "big",
+   "voice": "ちちんぷいぷい！",
+   "capColor": "#7b8f5a"
+  },
+  {
+   "id": "hat_110",
+   "name": "ちいさいかんむり",
+   "emoji": "👑",
+   "category": "henteko",
+   "rarity": 5,
+   "style": "cap",
+   "voice": "おうさまだぞ！",
+   "capColor": "#5f7fa8"
+  }
+ ],
+ "seasons": {
+  "spring": {
+   "id": "spring",
+   "label": "はる",
+   "icon": "🌸",
+   "skyTop": "#bfe3f7",
+   "skyBottom": "#fdf3e1",
+   "ground": "#c6e59a",
+   "groundDark": "#9fcf6e",
+   "floaters": [
+    "🌸",
+    "🌸",
+    "🦋",
+    "🌼"
+   ],
+   "table": [
+    {
+     "emoji": "🍓",
+     "name": "いちご",
+     "art": "ichigo"
+    },
+    {
+     "emoji": "🍱",
+     "name": "おべんとう",
+     "art": "bento"
+    },
+    {
+     "emoji": "🍡",
+     "name": "おだんご",
+     "art": "dango"
+    }
+   ],
+   "greeting": "はるだね。おはなが、さいてるよ。",
+   "things": [
+    {
+     "emoji": "🌸",
+     "name": "さくら"
+    },
+    {
+     "emoji": "🌱",
+     "name": "しんりょく"
+    },
+    {
+     "emoji": "🍓",
+     "name": "いちご"
+    },
+    {
+     "emoji": "🍙",
+     "name": "おはなみ"
+    },
+    {
+     "emoji": "🎒",
+     "name": "にゅうがくしき"
+    }
+   ]
+  },
+  "summer": {
+   "id": "summer",
+   "label": "なつ",
+   "icon": "🌻",
+   "skyTop": "#7cc8f2",
+   "skyBottom": "#e6f6ff",
+   "ground": "#9bd67a",
+   "groundDark": "#72bd52",
+   "floaters": [
+    "☁️",
+    "🌻",
+    "🎐",
+    "✨"
+   ],
+   "table": [
+    {
+     "emoji": "🍉",
+     "name": "スイカ",
+     "art": "suika"
+    },
+    {
+     "emoji": "🍧",
+     "name": "かきごおり",
+     "art": "kakigori"
+    },
+    {
+     "emoji": "🍵",
+     "name": "むぎちゃ",
+     "art": "mugicha"
+    }
+   ],
+   "greeting": "なつだね。おみずを、のもうね。",
+   "things": [
+    {
+     "emoji": "🌤️",
+     "name": "あおぞら"
+    },
+    {
+     "emoji": "🌻",
+     "name": "ひまわり"
+    },
+    {
+     "emoji": "🍉",
+     "name": "スイカ"
+    },
+    {
+     "emoji": "🏮",
+     "name": "なつまつり"
+    },
+    {
+     "emoji": "🎆",
+     "name": "はなび"
+    }
+   ]
+  },
+  "autumn": {
+   "id": "autumn",
+   "label": "あき",
+   "icon": "🍁",
+   "skyTop": "#f7d9a8",
+   "skyBottom": "#fff4e3",
+   "ground": "#e5c27a",
+   "groundDark": "#cf9f52",
+   "floaters": [
+    "🍁",
+    "🍂",
+    "🌰",
+    "🍁"
+   ],
+   "table": [
+    {
+     "emoji": "🍠",
+     "name": "やきいも",
+     "art": "yakiimo"
+    },
+    {
+     "emoji": "🌰",
+     "name": "くり",
+     "art": "kuri"
+    },
+    {
+     "emoji": "🍄",
+     "name": "きのこ",
+     "art": "kinoko"
+    }
+   ],
+   "greeting": "あきだね。はっぱが、あかいね。",
+   "things": [
+    {
+     "emoji": "🍁",
+     "name": "もみじ"
+    },
+    {
+     "emoji": "🌰",
+     "name": "どんぐり"
+    },
+    {
+     "emoji": "🍠",
+     "name": "さつまいも"
+    },
+    {
+     "emoji": "🌰",
+     "name": "くり"
+    },
+    {
+     "emoji": "🎃",
+     "name": "ハロウィン"
+    }
+   ]
+  },
+  "winter": {
+   "id": "winter",
+   "label": "ふゆ",
+   "icon": "⛄",
+   "skyTop": "#cfe0f3",
+   "skyBottom": "#f6f9ff",
+   "ground": "#f2f6fb",
+   "groundDark": "#d6e2ef",
+   "floaters": [
+    "❄️",
+    "❄️",
+    "✨",
+    "❄️"
+   ],
+   "table": [
+    {
+     "emoji": "🍲",
+     "name": "コーンスープ",
+     "art": "soup"
+    },
+    {
+     "emoji": "🍰",
+     "name": "ケーキ",
+     "art": "cake"
+    },
+    {
+     "emoji": "☕",
+     "name": "ココア",
+     "art": "cocoa"
+    }
+   ],
+   "greeting": "ふゆだね。あったかくしてね。",
+   "things": [
+    {
+     "emoji": "❄️",
+     "name": "ゆき"
+    },
+    {
+     "emoji": "🎄",
+     "name": "クリスマス"
+    },
+    {
+     "emoji": "🎍",
+     "name": "おしょうがつ"
+    },
+    {
+     "emoji": "🍲",
+     "name": "なべ"
+    },
+    {
+     "emoji": "☕",
+     "name": "あったかいのみもの"
+    }
+   ]
+  }
+ },
+ "items": [
+  {
+   "id": "item_none",
+   "name": "なし",
+   "emoji": "✋",
+   "voice": "てぶらで、いこう！"
+  },
+  {
+   "id": "item_001",
+   "name": "おはな",
+   "emoji": "🌷",
+   "voice": "おはな、どうぞ！"
+  },
+  {
+   "id": "item_002",
+   "name": "ふうせん",
+   "emoji": "🎈",
+   "voice": "ふわふわ〜！"
+  },
+  {
+   "id": "item_003",
+   "name": "えほん",
+   "emoji": "📖",
+   "voice": "えほん、よもうか？"
+  },
+  {
+   "id": "item_004",
+   "name": "くまのぬいぐるみ",
+   "emoji": "🧸",
+   "voice": "くまちゃんと、いっしょ！"
+  },
+  {
+   "id": "item_005",
+   "name": "ほしのステッキ",
+   "emoji": "🪄",
+   "voice": "ちちんぷいぷい！"
+  },
+  {
+   "id": "item_006",
+   "name": "かさ",
+   "emoji": "☂️",
+   "voice": "あめでも、へっちゃら！"
+  },
+  {
+   "id": "item_007",
+   "name": "カメラ",
+   "emoji": "📷",
+   "voice": "はい、チーズ！"
+  },
+  {
+   "id": "item_008",
+   "name": "ハート",
+   "emoji": "💛",
+   "voice": "だいすきだよ！"
+  },
+  {
+   "id": "item_009",
+   "name": "うちわ",
+   "emoji": "🪭",
+   "voice": "パタパタ〜！"
+  },
+  {
+   "id": "item_010",
+   "name": "ベル",
+   "emoji": "🔔",
+   "voice": "リンリン！"
+  }
+ ],
+ "cards": [
+  {
+   "id": "card_001",
+   "no": "001",
+   "title": "帽子の先生",
+   "emoji": "🎩",
+   "body": "イベントでは、おもしろい帽子をかぶって登場することも。てんとうむしや、にこにこの帽子をかぶったこともあるよ。",
+   "unlockAt": 1,
+   "color": "#ffd86b"
+  },
+  {
+   "id": "card_002",
+   "no": "002",
+   "title": "小児科の先生",
+   "emoji": "🩺",
+   "body": "子どもたちの病気を診る、お医者さん。",
+   "unlockAt": 3,
+   "color": "#9fd7f5"
+  },
+  {
+   "id": "card_003",
+   "no": "003",
+   "title": "おうちのお医者さん",
+   "emoji": "🏠",
+   "body": "病院だけでなく、おうちに行って診る「在宅医療」にも関わっているよ。",
+   "unlockAt": 6,
+   "color": "#b9e59a"
+  },
+  {
+   "id": "card_004",
+   "no": "004",
+   "title": "うりずんを作った先生",
+   "emoji": "🌿",
+   "body": "重い障がいのある子どもと家族が、楽しく安心して過ごせる場所「うりずん」を作ったよ。",
+   "unlockAt": 10,
+   "color": "#f7b6c8"
+  },
+  {
+   "id": "card_005",
+   "no": "005",
+   "title": "うりずんってなに？",
+   "emoji": "🏡",
+   "body": "子どもたちが日中にすごしたり、学校のあとに遊んだりできる場所。おうちへのお手伝いや、相談ものっているよ。",
+   "unlockAt": 15,
+   "color": "#ffc98a"
+  },
+  {
+   "id": "card_006",
+   "no": "006",
+   "title": "地域の先生",
+   "emoji": "🤝",
+   "body": "医療だけでなく、地域の人たちと一緒に活動しているよ。",
+   "unlockAt": 20,
+   "color": "#c9b8f0"
+  },
+  {
+   "id": "card_007",
+   "no": "007",
+   "title": "ひばりクリニック",
+   "emoji": "🐦",
+   "body": "先生のクリニックの名前は「ひばりクリニック」。宇都宮にあるよ。",
+   "unlockAt": 30,
+   "color": "#a7e3d4"
+  },
+  {
+   "id": "card_008",
+   "no": "008",
+   "title": "本を書いた先生",
+   "emoji": "📕",
+   "body": "『うりずんの風に吹かれて』という本を書いたよ。大人の人と一緒に読んでみてね。",
+   "unlockAt": 40,
+   "color": "#f5c27a"
+  },
+  {
+   "id": "card_009",
+   "no": "009",
+   "title": "宇都宮の先生",
+   "emoji": "🥟",
+   "body": "先生がいるのは栃木県の宇都宮市。ぎょうざやいちごが有名なまちだね。",
+   "unlockAt": 55,
+   "color": "#ffe08a"
+  },
+  {
+   "id": "card_010",
+   "no": "010",
+   "title": "いつもの先生",
+   "emoji": "😊",
+   "body": "いつもにこにこ。子どもたちと一緒に、たのしいことを見つけるのが得意な先生。",
+   "unlockAt": 70,
+   "color": "#ffb8a0"
+  },
+  {
+   "id": "card_011",
+   "no": "011",
+   "title": "ぼうし博士",
+   "emoji": "🏅",
+   "body": "たくさんの帽子を見つけたね！先生も、びっくりしているよ。",
+   "unlockAt": 90,
+   "color": "#d9c2ff"
+  },
+  {
+   "id": "card_012",
+   "no": "012",
+   "title": "ぜんぶ見つけた！",
+   "emoji": "👑",
+   "body": "すべての帽子を見つけたよ。ほんとうに、ありがとう！また遊ぼうね。",
+   "unlockAt": 110,
+   "color": "#ffd2e6"
+  }
+ ],
+ "outfits": [
+  {
+   "id": "outfit_001",
+   "name": "スーツ・ネクタイ",
+   "icon": "👔",
+   "jacket": "#33415c",
+   "jacketStyle": "suit",
+   "shirt": "#ffffff",
+   "tie": "#d9534f"
+  },
+  {
+   "id": "outfit_002",
+   "name": "スーツ・ノーネクタイ",
+   "icon": "🧥",
+   "jacket": "#5a5e66",
+   "jacketStyle": "suit",
+   "shirt": "#e8f1fb",
+   "tie": null,
+   "pattern": "tweed"
+  },
+  {
+   "id": "outfit_003",
+   "name": "ジャケット＋シャツ",
+   "icon": "🧥",
+   "jacket": "#8a6d4f",
+   "jacketStyle": "suit",
+   "shirt": "#fdfaf2",
+   "tie": null
+  },
+  {
+   "id": "outfit_004",
+   "name": "カーディガン＋シャツ",
+   "icon": "🧶",
+   "jacket": "#e6a94b",
+   "jacketStyle": "cardigan",
+   "shirt": "#ffffff",
+   "tie": null
+  },
+  {
+   "id": "outfit_005",
+   "name": "ベスト＋シャツ",
+   "icon": "🦺",
+   "jacket": "#4f6b4a",
+   "jacketStyle": "vest",
+   "shirt": "#ffffff",
+   "tie": "#2f5d8a"
+  },
+  {
+   "id": "outfit_006",
+   "name": "フォーマルカジュアル",
+   "icon": "👕",
+   "jacket": "#2d5f8f",
+   "jacketStyle": "suit",
+   "shirt": "#2f74c0",
+   "tie": null,
+   "badge": "🕊️"
+  },
+  {
+   "id": "outfit_007",
+   "name": "こうえんかいスタイル",
+   "icon": "🎤",
+   "jacket": "#26324a",
+   "jacketStyle": "suit",
+   "shirt": "#ffffff",
+   "tie": "#2f8f5f",
+   "badge": "🎤"
+  },
+  {
+   "id": "outfit_008",
+   "name": "おいしゃさんスタイル",
+   "icon": "🩺",
+   "jacket": "#ffffff",
+   "jacketStyle": "coat",
+   "shirt": "#2f74c0",
+   "tie": null,
+   "stethoscope": true
+  },
+  {
+   "id": "outfit_009",
+   "name": "しきてんフォーマル",
+   "icon": "🎀",
+   "jacket": "#1f1f24",
+   "jacketStyle": "suit",
+   "shirt": "#ffffff",
+   "tie": null,
+   "bow": "#c23b3b",
+   "badge": "🌹"
+  },
+  {
+   "id": "outfit_010",
+   "name": "きせつのフォーマル",
+   "icon": "🍂",
+   "jacket": "#9b5a3c",
+   "jacketStyle": "suit",
+   "shirt": "#fff6e6",
+   "tie": "#e0a030"
+  }
+ ],
+ "emojis": [
+  "🍓",
+  "🐶",
+  "🌸",
+  "🚗",
+  "🏯",
+  "🎉",
+  "👷",
+  "🥟",
+  "❓",
+  "🍎",
+  "🍌",
+  "🍉",
+  "🍊",
+  "🍇",
+  "🍠",
+  "🍰",
+  "🍙",
+  "🍜",
+  "🍣",
+  "🍮",
+  "🍦",
+  "🍞",
+  "🍧",
+  "🐱",
+  "🐰",
+  "🐻",
+  "🐼",
+  "🐸",
+  "🐞",
+  "🌼",
+  "🍀",
+  "🦋",
+  "🐝",
+  "🐢",
+  "🐟",
+  "🐙",
+  "🦖",
+  "🦉",
+  "🐧",
+  "🌻",
+  "🍁",
+  "🌳",
+  "🌱",
+  "🌷",
+  "☀️",
+  "☁️",
+  "🌈",
+  "⛄",
+  "🌙",
+  "⭐",
+  "🚑",
+  "🚒",
+  "🚓",
+  "🚲",
+  "🚌",
+  "🚃",
+  "✈️",
+  "🚀",
+  "🚢",
+  "🗼",
+  "⛩️",
+  "🕰️",
+  "🏥",
+  "🏠",
+  "🏡",
+  "🌿",
+  "🐦",
+  "🎄",
+  "🎃",
+  "🎍",
+  "👹",
+  "🎎",
+  "🎋",
+  "🏮",
+  "🚩",
+  "🎂",
+  "🎈",
+  "🎆",
+  "🎓",
+  "🩺",
+  "💉",
+  "🧑‍🚒",
+  "👨‍✈️",
+  "🔨",
+  "🥐",
+  "🍳",
+  "✏️",
+  "🌾",
+  "🎨",
+  "🪨",
+  "🚊",
+  "🧶",
+  "⛰️",
+  "🛝",
+  "🥁",
+  "🪽",
+  "🐈",
+  "🪴",
+  "🚦",
+  "⏰",
+  "🛸",
+  "🤖",
+  "🪻",
+  "🍄",
+  "🌵",
+  "🫧",
+  "😊",
+  "🌞",
+  "🥚",
+  "💛",
+  "💚",
+  "💙",
+  "🍡",
+  "👻",
+  "🎩",
+  "✨",
+  "👑",
+  "🍱",
+  "🎒",
+  "🎐",
+  "🍵",
+  "🌤️",
+  "🍂",
+  "🌰",
+  "❄️",
+  "🍲",
+  "☕",
+  "✋",
+  "📖",
+  "🧸",
+  "🪄",
+  "☂️",
+  "📷",
+  "🪭",
+  "🔔",
+  "🤝",
+  "📕",
+  "🏅",
+  "👔",
+  "🧥",
+  "🦺",
+  "👕",
+  "🕊️",
+  "🎤",
+  "🎀",
+  "🌹",
+  "❗",
+  "💕",
+  "😋",
+  "💦",
+  "💤",
+  "👍",
+  "🃏",
+  "⚙️",
+  "👨‍⚕️",
+  "🔁",
+  "🔊",
+  "🎁",
+  "📸",
+  "👒",
+  "⬅️",
+  "🔒",
+  "⭕",
+  "👆",
+  "🍽️",
+  "👨‍👩‍👧",
+  "🗣️",
+  "👂",
+  "🎵",
+  "📳",
+  "🌀",
+  "🔠",
+  "★",
+  "🤍"
+ ]
+}

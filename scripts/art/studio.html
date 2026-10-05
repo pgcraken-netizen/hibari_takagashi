@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="/node_modules/@fontsource/yusei-magic/index.css" />
+<style>
+  html, body { margin: 0; background: transparent; }
+  #stage { display: inline-block; line-height: 0; }
+  #stage svg { display: block; }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<script>
+/* =====================================================================
+ * 高橋先生とあそぼう！ アートスタジオ
+ * クレヨン＋水彩タッチの素材をSVGで描き、playwrightでPNG/WebPに書き出す。
+ * 絵文字モチーフは Noto Emoji のベクター（Apache-2.0）を「フェルト／水彩」風に加工。
+ * ===================================================================== */
+
+const INK = "#5a3d26";
+let NOTO, CHARS, DATA;
+let uid = 0;
+
+async function boot() {
+  NOTO = await (await fetch("/node_modules/@iconify-json/noto/icons.json")).json();
+  CHARS = await (await fetch("/node_modules/@iconify-json/noto/chars.json")).json();
+  DATA = await (await fetch("/scripts/art/data.json")).json();
+  await document.fonts.load('40px "Yusei Magic"', "うりずん");
+  window.READY = true;
+}
+
+/* ---------- フィルター ---------- */
+function defs() {
+  return `<defs>
+  <filter id="wc" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="3" result="warp"/>
+    <feDisplacementMap in="SourceGraphic" in2="warp" scale="5" xChannelSelector="R" yChannelSelector="G" result="w"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="2" seed="8" result="g"/>
+    <feColorMatrix in="g" type="saturate" values="0" result="gg"/>
+    <feComposite in="w" in2="gg" operator="arithmetic" k1="0.42" k2="0.78" k3="0" k4="0" result="tex"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="2" seed="11" result="blot"/>
+    <feColorMatrix in="blot" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.9 0.62" result="blotA"/>
+    <feFlood flood-color="#ffffff"/>
+    <feComposite in2="blotA" operator="in" result="lights"/>
+    <feComposite in="lights" in2="w" operator="in" result="lightsIn"/>
+    <feMorphology in="w" operator="erode" radius="2.2" result="inner"/>
+    <feComposite in="w" in2="inner" operator="out" result="edge"/>
+    <feColorMatrix in="edge" type="matrix" values="0.62 0 0 0 0  0 0.6 0 0 0  0 0 0.58 0 0  0 0 0 0.5 0" result="edgeDark"/>
+    <feMerge><feMergeNode in="tex"/><feMergeNode in="lightsIn"/><feMergeNode in="edgeDark"/></feMerge>
+  </filter>
+  <filter id="wcSoft" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="5" result="warp"/>
+    <feDisplacementMap in="SourceGraphic" in2="warp" scale="8" xChannelSelector="R" yChannelSelector="G" result="w"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="2" seed="4" result="g"/>
+    <feColorMatrix in="g" type="saturate" values="0" result="gg"/>
+    <feComposite in="w" in2="gg" operator="arithmetic" k1="0.3" k2="0.85" k3="0" k4="0"/>
+  </filter>
+  <filter id="cr" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="1" result="warp"/>
+    <feDisplacementMap in="SourceGraphic" in2="warp" scale="3" xChannelSelector="R" yChannelSelector="G" result="w"/>
+    <feTurbulence type="fractalNoise" baseFrequency="1.1 0.3" numOctaves="1" seed="4" result="n"/>
+    <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 1.85" result="na"/>
+    <feComposite in="w" in2="na" operator="in"/>
+  </filter>
+  <filter id="em" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="2" result="warp"/>
+    <feMorphology in="SourceAlpha" operator="dilate" radius="2.4" result="d"/>
+    <feDisplacementMap in="d" in2="warp" scale="4" xChannelSelector="R" yChannelSelector="G" result="dw"/>
+    <feFlood flood-color="${INK}" flood-opacity="0.88"/>
+    <feComposite in2="dw" operator="in" result="outline"/>
+    <feDisplacementMap in="SourceGraphic" in2="warp" scale="2.5" xChannelSelector="R" yChannelSelector="G" result="sg"/>
+    <feColorMatrix in="sg" type="saturate" values="0.88" result="sgs"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="9" result="g"/>
+    <feColorMatrix in="g" type="saturate" values="0" result="gg"/>
+    <feComposite in="sgs" in2="gg" operator="arithmetic" k1="0.45" k2="0.78" k3="0" k4="0" result="tex"/>
+    <feMerge><feMergeNode in="outline"/><feMergeNode in="tex"/></feMerge>
+  </filter>
+  <filter id="emThin" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="2" result="warp"/>
+    <feMorphology in="SourceAlpha" operator="dilate" radius="1.4" result="d"/>
+    <feDisplacementMap in="d" in2="warp" scale="2.5" xChannelSelector="R" yChannelSelector="G" result="dw"/>
+    <feFlood flood-color="${INK}" flood-opacity="0.85"/>
+    <feComposite in2="dw" operator="in" result="outline"/>
+    <feDisplacementMap in="SourceGraphic" in2="warp" scale="1.5" xChannelSelector="R" yChannelSelector="G" result="sg"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="9" result="g"/>
+    <feColorMatrix in="g" type="saturate" values="0" result="gg"/>
+    <feComposite in="sg" in2="gg" operator="arithmetic" k1="0.4" k2="0.8" k3="0" k4="0" result="tex"/>
+    <feMerge><feMergeNode in="outline"/><feMergeNode in="tex"/></feMerge>
+  </filter>
+  <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+    <feGaussianBlur stdDeviation="4"/>
+  </filter>
+  <pattern id="gingham" width="22" height="22" patternUnits="userSpaceOnUse">
+    <rect width="22" height="22" fill="#fff7ef"/>
+    <rect width="11" height="22" fill="#f29a9a" opacity="0.45"/>
+    <rect width="22" height="11" fill="#f29a9a" opacity="0.45"/>
+  </pattern>
+  <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
+    <circle cx="6" cy="6" r="2.4" fill="#fff" opacity="0.8"/><circle cx="19" cy="19" r="2.4" fill="#fff" opacity="0.8"/>
+  </pattern>
+  <pattern id="check" width="18" height="18" patternUnits="userSpaceOnUse">
+    <rect width="18" height="18" fill="#e6f0fb"/>
+    <path d="M0 9h18M9 0v18" stroke="#9cbbe0" stroke-width="2" opacity="0.7"/>
+  </pattern>
+  <pattern id="tweed" width="10" height="10" patternUnits="userSpaceOnUse">
+    <rect width="10" height="10" fill="#7d7f86"/>
+    <circle cx="2" cy="3" r="1.1" fill="#b9bbc2"/><circle cx="7" cy="7" r="1" fill="#3d3f45"/><circle cx="8" cy="2" r="0.8" fill="#d6d2c9"/><circle cx="4" cy="8" r="0.8" fill="#5c5e64"/>
+  </pattern>
+  <pattern id="stripes" width="30" height="30" patternUnits="userSpaceOnUse">
+    <rect width="30" height="30" fill="#fbeed5"/><rect width="13" height="30" fill="#f5e0bc" opacity="0.8"/>
+  </pattern>
+  <pattern id="boards" width="40" height="40" patternUnits="userSpaceOnUse">
+    <rect width="40" height="40" fill="#cfe6bd"/><path d="M0 0v40" stroke="#a9c995" stroke-width="3"/>
+  </pattern>
+  <pattern id="wood" width="60" height="16" patternUnits="userSpaceOnUse">
+    <rect width="60" height="16" fill="#e2b07a"/><path d="M0 8 q15 -3 30 0 t30 0" stroke="#c98d55" stroke-width="1.6" fill="none"/>
+  </pattern>
+  </defs>`;
+}
+
+/* ---------- 絵文字（Noto のベクター） ---------- */
+function notoBody(e) {
+  const k = [...e].map((c) => c.codePointAt(0).toString(16)).join("-");
+  const name = CHARS[k] || CHARS[k.replace(/-fe0f/g, "")] || CHARS[k.replace(/-fe0f/g, "") + "-fe0f"];
+  if (!name) throw new Error("no noto for " + e + " " + k);
+  const ic = NOTO.icons[name];
+  const p = "u" + uid++ + "_";
+  const body = ic.body.replace(/id="([^"]+)"/g, `id="${p}$1"`).replace(/url\(#([^)]+)\)/g, `url(#${p}$1)`).replace(/href="#([^"]+)"/g, `href="#${p}$1"`);
+  return { body, w: ic.width || NOTO.width || 128, h: ic.height || NOTO.height || 128 };
+}
+function emo(e, cx, cy, size, rot = 0, filter = "em", flip = false) {
+  const n = notoBody(e);
+  const s = size / n.w;
+  return `<g filter="url(#${filter})"><g transform="translate(${cx} ${cy}) rotate(${rot}) scale(${flip ? -s : s} ${s}) translate(${-n.w / 2} ${-n.h / 2})">${n.body}</g></g>`;
+}
+function emoRaw(e, cx, cy, size) {
+  const n = notoBody(e);
+  const s = size / n.w;
+  return `<g transform="translate(${cx} ${cy}) scale(${s}) translate(${-n.w / 2} ${-n.h / 2})">${n.body}</g>`;
+}
+
+/* 絵文字の代表色（帽子の地の色に使う） */
+async function emojiColor(e) {
+  const n = notoBody(e);
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${n.w} ${n.h}" width="64" height="64">${n.body}</svg>`;
+  const img = new Image();
+  img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  await img.decode();
+  const c = document.createElement("canvas");
+  c.width = c.height = 64;
+  const g = c.getContext("2d");
+  g.drawImage(img, 0, 0, 64, 64);
+  const d = g.getImageData(0, 0, 64, 64).data;
+  // 色相ごとに集計して、いちばん多い色（彩度で重みづけ）
+  const bins = Array.from({ length: 12 }, () => ({ r: 0, g: 0, b: 0, w: 0 }));
+  for (let i = 0; i < d.length; i += 4) {
+    if (d[i + 3] < 200) continue;
+    const R = d[i], G = d[i + 1], B = d[i + 2];
+    const mx = Math.max(R, G, B), mn = Math.min(R, G, B);
+    const sat = mx === 0 ? 0 : (mx - mn) / mx;
+    if (sat < 0.25 || mx < 70) continue;
+    let h = 0;
+    if (mx === R) h = ((G - B) / (mx - mn) + 6) % 6; else if (mx === G) h = (B - R) / (mx - mn) + 2; else h = (R - G) / (mx - mn) + 4;
+    const bin = bins[Math.floor(h * 2) % 12];
+    const w = sat;
+    bin.r += R * w; bin.g += G * w; bin.b += B * w; bin.w += w;
+  }
+  const top = bins.reduce((a, b) => (b.w > a.w ? b : a));
+  if (!top.w) return "#d8c3a5";
+  const r = top.r / top.w, gg = top.g / top.w, b = top.b / top.w;
+  const L = (v) => Math.round(v + (255 - v) * 0.25);
+  return `rgb(${L(r)},${L(gg)},${L(b)})`;
+}
+
+function svgWrap(vb, w, h, inner) {
+  return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="${vb}" width="${w}" height="${h}">${defs()}${inner}</svg>`;
+}
+
+/* ---------- 便利 ---------- */
+const crayon = (d, color = INK, w = 3, extra = "") => `<path d="${d}" fill="none" stroke="${color}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" filter="url(#cr)" ${extra}/>`;
+const paint = (d, fill, extra = "") => `<path d="${d}" fill="${fill}" filter="url(#wc)" ${extra}/>`;
+const both = (d, fill, w = 3, color = INK) => paint(d, fill) + crayon(d, color, w);
+function shade(hex, amt) {
+  const n = parseInt(hex.slice(1), 16);
+  const f = (c) => Math.max(0, Math.min(255, Math.round(amt < 0 ? c * (1 + amt) : c + (255 - c) * amt)));
+  const r = f((n >> 16) & 255), g = f((n >> 8) & 255), b = f(n & 255);
+  return "#" + ((1 << 24) | (r << 16) | (g << 8) | b).toString(16).slice(1);
+}
+
+/* =====================================================================
+ * 部屋（季節ごと） viewBox 0 0 400 500
+ * ===================================================================== */
+const SEASON_ROOM = {
+  spring: { sky: ["#bfe3f7", "#eef8ff"], ground: "#b9e08f", flags: ["#f7a8b8", "#ffe08a", "#bfe59f", "#f9c5d5", "#a8d8f5"], orn: "🌸", sill: ["🌷", "🌷"], wall: "🌸" },
+  summer: { sky: ["#7cc8f2", "#dff3ff"], ground: "#8fd06b", flags: ["#7cc8f2", "#ffd45c", "#9be3c9", "#ffffff", "#ffb877"], orn: "🎐", sill: ["🌻", "🍉"], wall: "🎐" },
+  autumn: { sky: ["#f6c98a", "#fff1d8"], ground: "#d9b46b", flags: ["#f0a35a", "#e2725b", "#ffd45c", "#c9a36b", "#f7c08a"], orn: "🍁", sill: ["🎃", "🌰"], wall: "🍂" },
+  winter: { sky: ["#c9d9ee", "#f4f8ff"], ground: "#f7fbff", flags: ["#e45b5b", "#ffffff", "#7fbf7f", "#a8d8f5", "#ffd45c"], orn: "⭐", sill: ["⛄", "🎄"], wall: "❄️" },
+};
+
+function windowView(season) {
+  const s = SEASON_ROOM[season];
+  const x = 24, y = 104, w = 112, h = 122;
+  let v = `<defs><clipPath id="glass"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="4"/></clipPath>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${s.sky[0]}"/><stop offset="1" stop-color="${s.sky[1]}"/></linearGradient></defs>
+    <g clip-path="url(#glass)">
+    <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="url(#sky)"/>`;
+  // 遠くの山
+  v += paint(`M${x - 10} ${y + 92} Q ${x + 30} ${y + 60} ${x + 62} ${y + 86} Q ${x + 90} ${y + 66} ${x + w + 10} ${y + 88} L ${x + w + 10} ${y + h} L ${x - 10} ${y + h} Z`, season === "winter" ? "#e4ecf7" : season === "autumn" ? "#d8a66a" : "#9fcb8a");
+  v += paint(`M${x - 10} ${y + 104} Q ${x + 50} ${y + 92} ${x + w + 10} ${y + 102} L ${x + w + 10} ${y + h} L ${x - 10} ${y + h} Z`, s.ground);
+  if (season === "spring") {
+    v += paint(`M${x + 70} ${y + 104} l4 -40 l5 0 l3 40 Z`, "#8b5e3c");
+    v += paint(`M${x + 50} ${y + 70} q-10 -30 20 -36 q16 -26 36 -4 q26 2 18 28 q8 22 -18 24 q-20 14 -36 0 q-26 6 -20 -12 Z`, "#f7b9cc");
+    v += emo("🌸", x + 62, y + 50, 18, 0, "emThin") + emo("🌸", x + 92, y + 62, 16, 20, "emThin");
+    v += emo("🌼", x + 16, y + 108, 14, 0, "emThin") + emo("🌼", x + 34, y + 114, 12, 0, "emThin") + emo("🌼", x + 100, y + 112, 13, 0, "emThin");
+    v += emo("🦋", x + 26, y + 40, 18, -10, "emThin");
+  } else if (season === "summer") {
+    v += paint(`M${x + 14} ${y + 34} q-4 -18 16 -18 q8 -16 26 -4 q20 -4 18 14 q10 8 -4 16 l-50 0 q-14 -2 -6 -8 Z`, "#ffffff");
+    v += emo("☀️", x + 92, y + 26, 34, 0, "emThin");
+    v += emo("🌻", x + 22, y + 96, 30, -6, "emThin") + emo("🌻", x + 52, y + 102, 26, 4, "emThin") + emo("🌻", x + 84, y + 98, 30, 0, "emThin");
+  } else if (season === "autumn") {
+    v += paint(`M${x + 60} ${y + 104} l3 -36 l5 0 l2 36 Z`, "#7a4a2c");
+    v += paint(`M${x + 36} ${y + 74} q-8 -28 22 -32 q14 -22 34 -2 q24 4 14 28 q6 18 -18 20 q-22 10 -36 -2 q-22 0 -16 -12 Z`, "#ec8a4a");
+    v += emo("🍁", x + 52, y + 54, 18, 10, "emThin") + emo("🍁", x + 84, y + 64, 16, -20, "emThin") + emo("🍂", x + 24, y + 110, 14, 0, "emThin") + emo("🍁", x + 98, y + 112, 12, 30, "emThin");
+    v += emo("🌙", x + 18, y + 22, 18, 0, "emThin");
+  } else {
+    v += paint(`M${x + 66} ${y + 104} l3 -30 l5 0 l2 30 Z`, "#6b4a33");
+    v += paint(`M${x + 44} ${y + 80} l26 -54 l26 54 Z`, "#7fb07f");
+    v += paint(`M${x + 48} ${y + 62} q22 -8 44 0 l-6 -10 q-16 -6 -32 0 Z`, "#ffffff");
+    v += emo("⛄", x + 22, y + 98, 30, 0, "emThin");
+    for (let i = 0; i < 14; i++) v += `<circle cx="${x + ((i * 37) % w)}" cy="${y + ((i * 53) % 90)}" r="${1.6 + (i % 3)}" fill="#fff" opacity="0.95"/>`;
+  }
+  v += `</g>`;
+  return v;
+}
+
+function garland(season) {
+  const s = SEASON_ROOM[season];
+  // 2次ベジェ上の点
+  const P0 = [-10, 26], P1 = [200, 92], P2 = [410, 26];
+  const at = (t) => [(1 - t) ** 2 * P0[0] + 2 * (1 - t) * t * P1[0] + t * t * P2[0], (1 - t) ** 2 * P0[1] + 2 * (1 - t) * t * P1[1] + t * t * P2[1]];
+  let g = crayon(`M${P0} Q${P1} ${P2}`, "#8a6a4a", 2);
+  const N = 13;
+  for (let i = 0; i < N; i++) {
+    const t = (i + 0.5) / N;
+    const [x, y] = at(t);
+    const [x2, y2] = at(t + 0.035);
+    const c = s.flags[i % s.flags.length];
+    const d = `M${x - 11} ${y - 1} L${x2 + 3} ${y2 - 1} L${(x + x2) / 2 - 3} ${(y + y2) / 2 + 26} Z`;
+    g += both(d, c, 2);
+    if (i % 3 === 1) g += emo(s.orn, (x + x2) / 2 - 3, (y + y2) / 2 + 40, 18, 0, "emThin");
+  }
+  return g;
+}
+
+function room(season) {
+  const s = SEASON_ROOM[season];
+  let v = "";
+  // 壁
+  v += `<rect width="400" height="500" fill="#fbeed5"/>`;
+  v += `<rect width="400" height="330" fill="url(#stripes)" filter="url(#wcSoft)"/>`;
+  // 天井のかげ
+  v += `<rect width="400" height="40" fill="#e9cfa5" opacity="0.35" filter="url(#wcSoft)"/>`;
+  // 腰板
+  v += `<rect y="318" width="400" height="200" fill="url(#boards)" filter="url(#wc)"/>`;
+  v += both(`M-5 312 L405 312 L405 324 L-5 324 Z`, "#c98d55", 2.5);
+  // 窓
+  v += both(`M12 92 L148 92 L148 238 L12 238 Z`, "#d9a46c", 3);
+  v += windowView(season);
+  v += crayon(`M24 104 h112 v122 h-112 Z`, INK, 2.5);
+  v += both(`M78 104 L82 104 L82 226 L78 226 Z`, "#d9a46c", 1.5);
+  v += both(`M24 162 L136 162 L136 166 L24 166 Z`, "#d9a46c", 1.5);
+  // 窓辺
+  v += both(`M4 236 L156 236 L160 248 L0 248 Z`, "#c98d55", 2.5);
+  // カーテン
+  v += both(`M2 86 Q 22 86 40 88 Q 34 150 18 170 Q 30 210 22 246 L 2 246 Z`, "#ffe08a", 2.5);
+  v += both(`M158 86 Q 138 86 120 88 Q 126 150 142 170 Q 130 210 138 246 L 158 246 Z`, "#ffe08a", 2.5);
+  v += `<path d="M2 86 Q 22 86 40 88 Q 34 150 18 170 Q 30 210 22 246 L 2 246 Z M158 86 Q 138 86 120 88 Q 126 150 142 170 Q 130 210 138 246 L 158 246 Z" fill="url(#dots)" opacity="0.7"/>`;
+  v += both(`M10 166 q12 -6 22 4 q-10 8 -22 -4 Z`, "#f7a8b8", 2) + both(`M150 166 q-12 -6 -22 4 q10 8 22 -4 Z`, "#f7a8b8", 2);
+  v += both(`M0 80 L160 80 L160 88 L0 88 Z`, "#a8743f", 2);
+  // 窓辺の季節の鉢
+  v += both(`M26 222 L54 222 L50 238 L30 238 Z`, "#d97a4a", 2) + emo(s.sill[0], 40, 208, 30);
+  v += emo(s.sill[1], 122, 222, 30);
+  // 右の額（うりずんの建物）
+  v += both(`M266 92 L392 92 L392 196 L266 196 Z`, "#c98d55", 3);
+  v += `<rect x="276" y="102" width="106" height="84" fill="#fff"/>`;
+  v += `<svg x="276" y="102" width="106" height="84" viewBox="58 428 262 190" preserveAspectRatio="xMidYMid slice"><image href="/scripts/art/keyvisual.png" width="941" height="1672"/></svg>`;
+  v += crayon(`M276 102 h106 v84 h-106 Z`, INK, 2);
+  v += crayon(`M329 92 L322 78 M329 92 L336 78`, "#8a6a4a", 1.5);
+  // 名札
+  v += both(`M290 202 L368 202 L372 226 L286 226 Z`, "#fffaf0", 2);
+  v += emo("🌱", 300, 213, 16, 0, "emThin");
+  v += `<text x="336" y="220" font-family="Yusei Magic" font-size="16" text-anchor="middle" fill="#4f8a3a">うりずん</text>`;
+  // 棚
+  v += both(`M258 286 L398 286 L398 296 L258 296 Z`, "#c98d55", 2.5);
+  v += emo("🪴", 280, 262, 40) + emo("📚", 330, 270, 32) + emo("🧸", 374, 266, 36);
+  // 壁の季節かざり
+  v += emo(s.wall, 236, 250, 22, -15, "emThin") + emo(s.wall, 190, 280, 18, 10, "emThin");
+  // 飾りガーランド
+  v += garland(season);
+  return svgWrap("0 0 400 500", 400, 500, v);
+}
+
+/* =====================================================================
+ * テーブル viewBox 0 0 400 170（部屋の y=380 から下にかさなる）
+ * ===================================================================== */
+function table() {
+  let v = "";
+  v += `<ellipse cx="200" cy="38" rx="210" ry="10" fill="#5a3d26" opacity="0.18" filter="url(#shadow)"/>`;
+  // 天板
+  v += `<path d="M-6 26 Q200 12 406 26 L406 74 L-6 74 Z" fill="url(#wood)" filter="url(#wc)"/>`;
+  v += crayon(`M-6 26 Q200 12 406 26`, INK, 3);
+  // テーブルクロス
+  v += `<path d="M14 22 Q200 8 386 22 L398 70 L2 70 Z" fill="url(#gingham)" filter="url(#wc)"/>`;
+  v += crayon(`M14 22 Q200 8 386 22 L398 70`, INK, 2.5);
+  v += crayon(`M14 22 L2 70`, INK, 2.5);
+  // 前に垂れる布（スカラップ）
+  let hem = `M-6 66 L406 66 L406 150`;
+  for (let x = 406; x > -6; x -= 34) hem += ` Q ${x - 17} 170 ${x - 34} 150`;
+  hem += ` Z`;
+  v += `<path d="${hem}" fill="url(#gingham)" filter="url(#wc)"/>`;
+  v += crayon(hem.replace(" Z", ""), INK, 2.5);
+  v += `<path d="M-6 66 L406 66 L406 74 L-6 74 Z" fill="#e57f7f" opacity="0.55" filter="url(#wc)"/>`;
+  // レースのふち
+  for (let x = 5; x < 400; x += 34) v += `<circle cx="${x + 12}" cy="${158}" r="4" fill="#fff" opacity="0.9" filter="url(#wc)"/>`;
+  return svgWrap("0 0 400 170", 400, 170, v);
+}
+
+/* =====================================================================
+ * 食べ物 viewBox 0 0 120 100
+ * ===================================================================== */
+const plate = (cx = 60, cy = 80, rx = 52, ry = 15, rim = "#8fb8e0") =>
+  `<ellipse cx="${cx}" cy="${cy + 6}" rx="${rx}" ry="${ry * 0.8}" fill="#5a3d26" opacity="0.18" filter="url(#shadow)"/>` +
+  both(`M${cx - rx} ${cy} A ${rx} ${ry} 0 1 0 ${cx + rx} ${cy} A ${rx} ${ry} 0 1 0 ${cx - rx} ${cy} Z`, "#ffffff", 2.5) +
+  crayon(`M${cx - rx + 8} ${cy} A ${rx - 8} ${ry - 4} 0 1 0 ${cx + rx - 8} ${cy} A ${rx - 8} ${ry - 4} 0 1 0 ${cx - rx + 8} ${cy}`, rim, 2);
+const bowl = (fill = "#f6f1e6", band = "#e57f7f") =>
+  `<ellipse cx="60" cy="90" rx="40" ry="8" fill="#5a3d26" opacity="0.2" filter="url(#shadow)"/>` +
+  both(`M18 56 Q22 92 60 92 Q98 92 102 56 Z`, fill, 2.5) + crayon(`M24 70 Q60 80 96 70`, band, 3);
+const basket = () =>
+  `<ellipse cx="60" cy="90" rx="44" ry="8" fill="#5a3d26" opacity="0.2" filter="url(#shadow)"/>` +
+  both(`M14 58 L106 58 L96 90 L24 90 Z`, "#d9a46c", 2.5) +
+  crayon(`M18 68 L102 68 M21 79 L99 79 M40 58 L42 90 M60 58 L60 90 M80 58 L78 90`, "#a8743f", 1.6);
+const steam = (x = 60, y = 30) => crayon(`M${x - 12} ${y} q-6 -8 0 -16 q6 -8 0 -16 M${x} ${y - 4} q-6 -8 0 -16 q6 -8 0 -16 M${x + 12} ${y} q-6 -8 0 -16 q6 -8 0 -16`, "#b9a99a", 2.2);
+
+const FOODS = {
+  ichigo: () => bowl("#ffffff", "#8fb8e0") + emo("🍓", 40, 52, 34, -20) + emo("🍓", 62, 46, 36, 0) + emo("🍓", 82, 52, 34, 18) + emo("🍓", 52, 62, 30, -6) + emo("🍓", 72, 63, 30, 10),
+  bento: () => plate(60, 82, 54, 13, "#c9a36b") + both(`M16 50 L104 50 L100 86 L20 86 Z`, "#6b4a33", 2.5) + both(`M22 54 L98 54 L95 82 L25 82 Z`, "#fff7ea", 1.5) + crayon(`M60 54 L60 82`, "#6b4a33", 2) + emo("🍙", 40, 66, 26, -6) + emo("🍤", 75, 62, 22, 20) + emo("🥦", 70, 74, 18) + emo("🍅", 88, 74, 16),
+  dango: () => plate() + emo("🍡", 46, 54, 52, -30) + emo("🍡", 74, 56, 52, -8),
+  suika: () => plate() + emo("🍉", 38, 58, 46, -12) + emo("🍉", 72, 58, 50, 8),
+  kakigori: () => `<ellipse cx="60" cy="90" rx="34" ry="7" fill="#5a3d26" opacity="0.2" filter="url(#shadow)"/>` + emo("🍧", 60, 54, 78),
+  mugicha: () => `<ellipse cx="60" cy="92" rx="26" ry="6" fill="#5a3d26" opacity="0.2" filter="url(#shadow)"/>` + paint(`M38 30 L82 30 L78 90 L42 90 Z`, "#d9e9f3", `opacity="0.7"`) + paint(`M40 44 L80 44 L77 88 L43 88 Z`, "#c8894a") + `<rect x="48" y="50" width="12" height="12" rx="2" fill="#fff" opacity="0.7" transform="rotate(12 54 56)"/><rect x="62" y="56" width="11" height="11" rx="2" fill="#fff" opacity="0.7" transform="rotate(-10 67 61)"/>` + crayon(`M38 30 L42 90 L78 90 L82 30`, INK, 2.5) + crayon(`M38 30 Q60 36 82 30`, INK, 2) + crayon(`M70 20 L64 60`, "#7cc8f2", 4),
+  yakiimo: () => both(`M10 70 L60 56 L110 70 L64 92 Z`, "#efe3c4", 2) + crayon(`M24 70 L62 62 M36 76 L76 66`, "#b9a99a", 1.4) + emo("🍠", 44, 64, 46, -20) + emo("🍠", 76, 68, 44, 14),
+  kuri: () => basket() + emo("🌰", 38, 54, 28, -10) + emo("🌰", 60, 50, 30, 6) + emo("🌰", 82, 54, 28, 16) + emo("🌰", 50, 62, 24) + emo("🌰", 72, 62, 24, -12),
+  kinoko: () => basket() + emo("🍄", 40, 46, 34, -14) + emo("🍄", 66, 42, 38, 4) + emo("🍄", 88, 50, 30, 18),
+  soup: () => bowl("#ffffff", "#f0b15a") + paint(`M22 58 Q60 50 98 58 Q60 66 22 58 Z`, "#ffd877") + `<circle cx="50" cy="57" r="2.5" fill="#f3b23a"/><circle cx="66" cy="59" r="2.5" fill="#f3b23a"/><circle cx="58" cy="55" r="2" fill="#7fbf5f"/>` + steam(60, 44),
+  cake: () => plate() + emo("🍰", 60, 52, 66),
+  cocoa: () => `<ellipse cx="60" cy="92" rx="36" ry="7" fill="#5a3d26" opacity="0.2" filter="url(#shadow)"/>` + both(`M30 46 L80 46 L76 90 L34 90 Z`, "#f7a8b8", 2.5) + both(`M80 54 q20 2 16 18 q-4 12 -18 10`, "none", 3) + paint(`M32 48 Q55 54 78 48 Q55 44 32 48 Z`, "#8a5a3c") + `<circle cx="48" cy="48" r="5" fill="#fff" filter="url(#wc)"/><circle cx="60" cy="47" r="5" fill="#fff" filter="url(#wc)"/>` + steam(55, 38),
+};
+
+/* =====================================================================
+ * 衣装  フレーム F: x130..790, y330..1050（キービジュアル座標）
+ * ===================================================================== */
+const TORSO = `M390 882 C330 890 252 898 206 926 C168 954 142 1000 132 1052 L790 1052 C786 1000 760 952 716 926 C672 902 592 890 526 880 Z`;
+const NECKL = [396, 870], NECKR = [520, 868], CX = 458;
+
+function outfitSvg(o) {
+  let v = "";
+  const jacket = o.jacket;
+  const dark = o.jacket ? shade(o.jacket, -0.2) : null;
+  v += `<defs><clipPath id="torso"><path d="${TORSO}"/></clipPath></defs>`;
+  v += `<g clip-path="url(#torso)">`;
+  // からだ全体（上着の色）
+  const base = o.style === "tshirt" ? o.shirt : o.style === "vest" ? o.sleeve : jacket;
+  v += `<path d="${TORSO}" fill="${o.pattern ? `url(#${o.pattern})` : base}" filter="url(#wc)"/>`;
+  if (o.pattern) v += `<path d="${TORSO}" fill="${base}" opacity="0.35" filter="url(#wc)"/>`;
+
+  // シャツ（V）
+  if (o.style !== "tshirt") {
+    v += paint(`M386 878 Q458 920 530 876 L506 1060 L412 1060 Z`, o.shirtPattern ? `url(#${o.shirtPattern})` : o.shirt);
+  }
+  if (o.innerTee) {
+    // Tシャツ（白衣・ジャケットの下）
+    v += paint(`M384 880 Q458 924 532 878 L512 1060 L404 1060 Z`, o.innerTee);
+    v += crayon(`M386 882 Q458 926 530 880`, shade(o.innerTee, -0.3), 4);
+    v += emo("🕊️", 466, 980, 56, 0, "emThin");
+  }
+  if (o.style === "tshirt") {
+    v += crayon(`M386 882 Q458 926 530 880`, shade(o.shirt, -0.3), 4);
+  }
+  // えり
+  if (o.collar) {
+    v += both(`M388 876 L454 916 L424 956 L376 898 Z`, o.shirt, 2.2);
+    v += both(`M530 874 L464 916 L494 956 L540 896 Z`, o.shirt, 2.2);
+  }
+  // ネクタイ
+  if (o.tie) {
+    v += both(`M446 912 L472 912 L468 932 L450 932 Z`, o.tie, 2);
+    v += both(`M450 932 L468 932 L482 1040 L459 1066 L438 1040 Z`, o.tie, 2);
+    v += crayon(`M446 964 L476 990 M442 1008 L480 1040`, shade(o.tie, 0.45), 4);
+  }
+  if (o.bow) {
+    v += both(`M459 918 L420 898 L418 940 Z`, o.bow, 2) + both(`M459 918 L498 898 L500 940 Z`, o.bow, 2);
+    v += both(`M450 910 L468 910 L468 928 L450 928 Z`, shade(o.bow, -0.2), 2);
+  }
+  // スカーフ（冬）
+  if (o.scarf) {
+    v += both(`M378 880 Q458 930 540 878 L548 912 Q458 970 370 912 Z`, o.scarf, 2.5);
+    v += both(`M500 900 L540 1060 L500 1060 L478 920 Z`, o.scarf, 2.5);
+    v += crayon(`M378 896 Q458 946 544 894`, shade(o.scarf, 0.4), 3);
+  }
+
+  // 上着の前身ごろ（ラペル）
+  if (o.style === "suit" || o.style === "coat") {
+    const lap = o.style === "coat" ? "#f2f4f7" : dark;
+    // 左前身ごろ
+    v += both(`M120 906 L388 878 L420 960 L440 1060 L120 1060 Z`, jacket, 2.5);
+    v += both(`M800 906 L530 876 L498 960 L478 1060 L800 1060 Z`, jacket, 2.5);
+    // ラペル
+    v += both(`M388 878 L420 960 L398 976 L436 1060 L452 1060 L410 956 L432 930 Z`, lap, 2.2);
+    v += both(`M530 876 L498 960 L520 976 L482 1060 L466 1060 L508 956 L486 930 Z`, lap, 2.2);
+    v += both(`M388 878 L372 914 L402 936 Z`, lap, 2) + both(`M530 876 L546 912 L516 936 Z`, lap, 2);
+    // 胸ポケット
+    v += crayon(`M560 990 L622 984`, shade(jacket, -0.35), 3);
+    if (o.pocketSquare) v += both(`M566 990 L574 970 L586 982 L598 966 L606 986 Z`, o.pocketSquare, 1.8);
+  }
+  if (o.style === "cardigan") {
+    v += both(`M120 906 L388 878 L432 1060 L120 1060 Z`, jacket, 2.5);
+    v += both(`M800 906 L530 876 L486 1060 L800 1060 Z`, jacket, 2.5);
+    v += crayon(`M388 878 L432 1060 M530 876 L486 1060`, dark, 9);
+    for (const y of [960, 1010]) v += `<circle cx="${436 - (1060 - y) * 0.05}" cy="${y}" r="7" fill="${dark}" filter="url(#wc)"/>` + crayon(`M${429 - (1060 - y) * 0.05} ${y} a7 7 0 1 0 14 0 a7 7 0 1 0 -14 0`, INK, 1.6);
+    for (let i = 0; i < 18; i++) v += crayon(`M${180 + i * 34} 960 l0 90`, shade(jacket, -0.1), 1.4, `opacity="0.6"`);
+  }
+  if (o.style === "vest") {
+    v += both(`M262 906 L388 878 L436 1060 L270 1060 Z`, jacket, 2.5);
+    v += both(`M660 906 L530 876 L482 1060 L650 1060 Z`, jacket, 2.5);
+    for (const y of [970, 1020]) v += `<circle cx="${445 + (y - 970) * 0.06}" cy="${y}" r="5" fill="${dark}"/>`;
+  }
+  // 聴診器
+  if (o.stethoscope) {
+    v += crayon(`M396 888 C360 930 352 990 392 1040`, "#2d5f86", 9);
+    v += crayon(`M522 886 C560 930 566 990 530 1040`, "#2d5f86", 9);
+    v += crayon(`M392 1040 Q 460 1080 530 1040`, "#2d5f86", 9);
+  }
+  // バッジ・マイク
+  if (o.lanyard) {
+    v += crayon(`M404 890 L548 960 M516 886 L548 960`, "#3a7bd5", 5);
+    v += both(`M524 958 L590 958 L590 1010 L524 1010 Z`, "#ffffff", 2);
+    v += `<rect x="532" y="968" width="50" height="10" fill="#7fbf5f"/>`;
+  }
+  if (o.mic) v += both(`M408 934 l14 -6 l6 14 l-14 6 Z`, "#333", 1.5);
+  if (o.pin) v += emo(o.pin, 590, 960, 48);
+  v += `</g>`;
+  v += crayon(TORSO.replace(" Z", "").replace(/L132 1052 L790 1052/, "M790 1052"), INK, 3.5);
+  return v;
+}
+
+const OUTFIT_DEFS = {
+  outfit_001: { style: "suit", jacket: "#3b4a6b", shirt: "#ffffff", collar: true, tie: "#d9534f", pocketSquare: "#ffffff" },
+  outfit_002: { style: "suit", jacket: "#7d7f86", pattern: "tweed", shirt: "#e6f0fb", shirtPattern: "check", collar: true },
+  outfit_003: { style: "suit", jacket: "#8a6d4f", shirt: "#fdfaf2", collar: true },
+  outfit_004: { style: "cardigan", jacket: "#e6a94b", shirt: "#ffffff", collar: true },
+  outfit_005: { style: "vest", jacket: "#4f6b4a", sleeve: "#ffffff", shirt: "#ffffff", collar: true, tie: "#2f5d8a" },
+  outfit_006: { style: "suit", jacket: "#2d4f7c", shirt: "#2f74c0", innerTee: "#2f74c0" },
+  outfit_007: { style: "suit", jacket: "#26324a", shirt: "#ffffff", collar: true, tie: "#2f8f5f", lanyard: true, mic: true },
+  outfit_008: { style: "coat", jacket: "#ffffff", shirt: "#2f74c0", innerTee: "#2f74c0", stethoscope: true },
+  outfit_009: { style: "suit", jacket: "#1f1f24", shirt: "#ffffff", collar: true, bow: "#c23b3b", pin: "🌹" },
+  outfit_010_spring: { style: "suit", jacket: "#86b56e", shirt: "#fff7ec", collar: true, tie: "#f29ab2", pin: "🌸" },
+  outfit_010_summer: { style: "suit", jacket: "#9cc9e8", shirt: "#ffffff", collar: true, pin: "🌻" },
+  outfit_010_autumn: { style: "suit", jacket: "#9b5a3c", shirt: "#fff6e6", collar: true, tie: "#e0a030", pin: "🍁" },
+  outfit_010_winter: { style: "suit", jacket: "#7a3046", shirt: "#ffffff", collar: true, scarf: "#e9e2d0", pin: "❄️" },
+};
+
+/* =====================================================================
+ * 帽子  フレーム H: x250..710, y330..700（キービジュアル座標）
+ * ===================================================================== */
+// 頭の切り口（つばの下端）。左→右
+const CUT = [[306, 662], [318, 646], [330, 627], [346, 617], [380, 607], [420, 599], [460, 597], [500, 599], [540, 607], [575, 623], [603, 641], [622, 659], [640, 677], [656, 694]];
+const smooth = (pts) => {
+  let d = `M${pts[0][0]} ${pts[0][1]}`;
+  for (let i = 1; i < pts.length - 1; i++) {
+    const [x, y] = pts[i], [nx, ny] = pts[i + 1];
+    d += ` Q${x} ${y} ${(x + nx) / 2} ${(y + ny) / 2}`;
+  }
+  const L = pts[pts.length - 1];
+  return d + ` L${L[0]} ${L[1]}`;
+};
+const off = (pts, dy, dxScale = 0) => pts.map(([x, y]) => [x + (x - 480) * dxScale, y + dy]);
+
+function feltCap(color, opt = {}) {
+  const dark = shade(color, -0.22);
+  const crownTop = opt.crownTop ?? 502;
+  const bottom = off(CUT, 4);
+  const bottomR = [...bottom].reverse();
+  // クラウン（つばの線から上のドーム）
+  const crown = `${smooth(off(CUT, -6))} C 676 620 646 ${crownTop + 6} 470 ${crownTop - 6} C 330 ${crownTop - 2} 280 600 ${CUT[0][0]} ${CUT[0][1] - 6} Z`;
+  let v = "";
+  v += `<path d="${crown}" fill="${color}" filter="url(#wc)"/>`;
+  // はぎ目
+  v += crayon(`M478 ${crownTop - 2} C 430 500 400 560 392 606 M478 ${crownTop - 2} C 520 500 560 560 572 618 M478 ${crownTop - 2} L 466 598`, dark, 2.2, `stroke-dasharray="5 6"`);
+  v += `<circle cx="478" cy="${crownTop + 2}" r="9" fill="${dark}" filter="url(#wc)"/>`;
+  v += crayon(crown, INK, 3.2);
+  // つば（バンド）
+  const band = `${smooth(off(CUT, -22, -0.02))} L ${bottom[bottom.length - 1][0] + 4} ${bottom[bottom.length - 1][1]} ${smooth(bottomR).replace(/^M/, "L")} Z`;
+  v += `<path d="${band}" fill="${shade(color, -0.12)}" filter="url(#wc)"/>`;
+  v += crayon(band, INK, 3);
+  // 前のつば（ちょっと前に出る）
+  const visor = `M346 616 Q 460 632 580 626 Q 470 650 350 626 Z`;
+  v += `<path d="${visor}" fill="${shade(color, -0.32)}" filter="url(#wc)"/>` + crayon(visor, INK, 2.6);
+  return v;
+}
+
+function beanie(color) {
+  const bottom = off(CUT, 4);
+  const crown = `${smooth(off(CUT, -4))} C 690 580 650 462 478 458 C 306 462 266 580 ${CUT[0][0]} ${CUT[0][1] - 4} Z`;
+  let v = `<path d="${crown}" fill="${color}" filter="url(#wc)"/>`;
+  v += crayon(crown, INK, 3.2);
+  // ふちのステッチ
+  v += crayon(smooth(off(CUT, -14, -0.02)), shade(color, -0.3), 2, `stroke-dasharray="6 7" opacity="0.8"`);
+  return v;
+}
+
+const CAP_COLORS = ["#c8a27a", "#b78f63", "#d8b48a", "#a8b07a", "#8fb0cf", "#e6b0a6"];
+
+async function hatSvg(h, i) {
+  const parts = [...new Intl.Segmenter("ja", { granularity: "grapheme" }).segment(h.emoji)].map((x) => x.segment);
+  const capColor = CAP_COLORS[i % CAP_COLORS.length];
+  let v = "";
+  switch (h.style) {
+    case "cap":
+      v += feltCap(capColor);
+      v += emo(parts[0], 474, 494, 150, -4);
+      if (parts[1]) v += emo(parts[1], 614, 586, 86, 14);
+      if (parts[2]) v += emo(parts[2], 344, 580, 86, -14);
+      break;
+    case "trio":
+      v += feltCap(capColor);
+      v += emo(parts[1] ?? parts[0], 474, 488, 130, 0);
+      v += emo(parts[0], 346, 566, 108, -18);
+      v += emo(parts[2] ?? parts[0], 614, 586, 108, 16);
+      break;
+    case "tall":
+      v += feltCap(capColor);
+      v += emo(parts[0], 478, 440, 210, 0);
+      if (parts[1]) v += emo(parts[1], 620, 600, 70, 14);
+      break;
+    case "big":
+    default: {
+      const col = await emojiColor(parts[0]);
+      v += beanie(col);
+      if (parts[1] === "🪽") {
+        v += emo("🪽", 300, 520, 110, -20, "em", true) + emo("🪽", 660, 520, 110, 20);
+      }
+      v += emo(parts[0], 478, 496, 262, 0);
+      if (parts[1] && parts[1] !== "🪽") v += emo(parts[1], 624, 604, 78, 12);
+      if (parts[2]) v += emo(parts[2], 334, 604, 70, -12);
+    }
+  }
+  return v;
+}
+
+/* =====================================================================
+ * 書き出しの入り口
+ * ===================================================================== */
+async function render(name) {
+  uid = 0;
+  const st = document.getElementById("stage");
+  let html = "";
+  if (name.startsWith("room-")) html = room(name.slice(5));
+  else if (name === "table") html = table();
+  else if (name.startsWith("food-")) html = svgWrap("0 0 120 100", 120, 100, FOODS[name.slice(5)]());
+  else if (name.startsWith("outfit_")) html = svgWrap("130 330 660 720", 660, 720, outfitSvg(OUTFIT_DEFS[name]));
+  else if (name.startsWith("hat_")) {
+    const i = DATA.hats.findIndex((h) => h.id === name);
+    html = svgWrap("250 330 460 370", 460, 370, await hatSvg(DATA.hats[i], i));
+  } else if (name.startsWith("emoji:")) {
+    const e = name.slice(6);
+    html = svgWrap("0 0 140 140", 140, 140, emo(e, 70, 70, 120, 0, "emThin"));
+  }
+  st.innerHTML = html;
+  // 画像の読み込み待ち
+  await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+  const imgs = st.querySelectorAll("image");
+  await Promise.all([...imgs].map((im) => new Promise((r) => { const i = new Image(); i.onload = r; i.onerror = r; i.src = im.getAttribute("href"); })));
+  await new Promise((r) => setTimeout(r, 60));
+  return true;
+}
+window.render = render;
+window.OUTFIT_DEFS = OUTFIT_DEFS;
+window.FOODS = FOODS;
+boot();
+</script>
+</body>
+</html>

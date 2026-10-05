@@ -1,5 +1,5 @@
 // シンプルなオフライン対応：ページは「ネット優先・だめならキャッシュ」、静的ファイルは「キャッシュ優先」
-const CACHE = "sensei-asobou-v1";
+const CACHE = "sensei-asobou-v2";
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(["/", "/manifest.webmanifest", "/icon-192.png"])).then(() => self.skipWaiting()));
 });

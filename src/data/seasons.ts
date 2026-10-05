@@ -25,9 +25,9 @@ export const SEASONS: Record<Season, SeasonInfo> = {
     groundDark: "#9fcf6e",
     floaters: ["🌸", "🌸", "🦋", "🌼"],
     table: [
-      { emoji: "🍓", name: "いちご", art: "ichigo" },
-      { emoji: "🍱", name: "おべんとう", art: "bento" },
       { emoji: "🍡", name: "おだんご", art: "dango" },
+      { emoji: "🍓", name: "いちご", art: "ichigo" },
+      { emoji: "🍰", name: "いちごケーキ", art: "cake" },
     ],
     greeting: "はるだね。おはなが、さいてるよ。",
     things: [

@@ -7,7 +7,8 @@ const { OUTFITS } = await import("../../src/data/outfits.ts");
 const seg = new Intl.Segmenter("ja", { granularity: "grapheme" });
 const emojis = new Set();
 const add = (s) => { for (const g of seg.segment(s)) if (/\p{Extended_Pictographic}/u.test(g.segment)) emojis.add(g.segment); };
-for (const f of ["src/data/hats.ts", "src/data/seasons.ts", "src/data/content.ts", "src/data/outfits.ts", "src/lib/art.ts", "src/components/GameApp.tsx", "src/components/Title.tsx"]) {
+const files = ["src/data/hats.ts", "src/data/seasons.ts", "src/data/content.ts", "src/data/outfits.ts", "src/lib/art.ts", ...fs.readdirSync("src/components", { recursive: true }).filter((f) => String(f).endsWith(".tsx")).map((f) => "src/components/" + f)];
+for (const f of files) {
   const src = fs.readFileSync(f, "utf8");
   for (const m of src.matchAll(/["'`]([^"'`\n]*\p{Extended_Pictographic}[^"'`\n]*)["'`]/gu)) add(m[1]);
 }

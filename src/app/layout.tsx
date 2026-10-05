@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "@fontsource/yusei-magic/index.css";
 import "@fontsource/zen-maru-gothic/500.css";
 import "@fontsource/zen-maru-gothic/700.css";
+import "@fontsource/zen-maru-gothic/900.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,7 +20,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#fff8ea",
+  themeColor: "#fdf3dc",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

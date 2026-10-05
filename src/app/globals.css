@@ -677,3 +677,789 @@ a:focus-visible {
 .safe-bottom {
   padding-bottom: max(6px, env(safe-area-inset-bottom));
 }
+
+/* =====================================================================
+ * ゲーム画面（参考画像のデザイン）
+ * ===================================================================== */
+
+html,
+body {
+  background-color: #fdf3dc;
+}
+.app {
+  font-family: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", sans-serif;
+  font-weight: 700;
+  color: #5a3a22;
+}
+.cq {
+  container-type: inline-size;
+}
+
+/* 絵の上の見えないボタン */
+.hot {
+  position: absolute;
+  background: transparent;
+  touch-action: manipulation;
+  transition: background 0.15s ease, transform 0.12s ease;
+}
+.hot:active {
+  background: rgba(255, 255, 255, 0.3);
+}
+.bigbtn {
+  border-radius: 18%;
+}
+.bigbtn:active {
+  transform: translateY(2px) scale(0.97);
+}
+
+.count {
+  display: flex;
+  align-items: center;
+  font-weight: 900;
+  color: #4a3424;
+  letter-spacing: 0.02em;
+}
+
+/* ナビ */
+.navbtn {
+  position: absolute;
+  touch-action: manipulation;
+  border-radius: 18px;
+}
+.navbtn:active {
+  background: rgba(255, 255, 255, 0.4);
+}
+.navlabel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 58%;
+  text-align: center;
+  font-weight: 900;
+  color: #5a3a22;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+.navbtn.on .navlabel {
+  color: #e8542f;
+}
+.navline {
+  position: absolute;
+  left: 22%;
+  right: 22%;
+  top: 82%;
+  height: 4.5%;
+  border-radius: 99px;
+  background: #f08a3c;
+}
+.badge-new2 {
+  position: absolute;
+  right: 6%;
+  top: 2%;
+  border-radius: 99px;
+  background: #e2546a;
+  color: #fff;
+  font-weight: 900;
+  padding: 0 0.5em;
+  border: 2px solid #fff;
+  line-height: 1.5;
+  font-size: 0.65em;
+}
+
+/* 雲のふきだし */
+.cloud {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4.5% 7%;
+  line-break: strict;
+  text-align: center;
+  font-weight: 900;
+  line-height: 1.38;
+  color: #4a3424;
+  background: #fffefa;
+  border: 0.35cqw solid #6b4a30;
+  border-radius: 44% 50% 46% 52% / 48% 44% 52% 46%;
+  box-shadow:
+    0 0.6cqw 0 rgba(90, 60, 30, 0.12),
+    -1.4cqw -0.8cqw 0 -0.3cqw #fffefa,
+    -1.4cqw -0.8cqw 0 0 #6b4a30;
+  z-index: 5;
+}
+.cloud::before {
+  content: "";
+  position: absolute;
+  left: -6%;
+  bottom: 18%;
+  width: 14%;
+  height: 12%;
+  background: #fffefa;
+  border: 0.35cqw solid #6b4a30;
+  border-radius: 50%;
+}
+.cloud::after {
+  content: "";
+  position: absolute;
+  left: -15%;
+  bottom: 8%;
+  width: 7%;
+  height: 6%;
+  background: #fffefa;
+  border: 0.35cqw solid #6b4a30;
+  border-radius: 50%;
+}
+.cloud-sm {
+  padding: 4% 6%;
+}
+.cloud > span {
+  display: block;
+}
+
+/* へやの丸ボタン（音声ON など） */
+.roundchip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2%;
+  border-radius: 50%;
+  background: #fffaf0;
+  border: 0.55cqw solid #f3a748;
+  box-shadow: 0 0.5cqw 0 rgba(150, 90, 30, 0.25);
+  color: #2f7a5c;
+  font-weight: 900;
+  line-height: 1.1;
+  text-align: center;
+  touch-action: manipulation;
+  z-index: 6;
+}
+.roundchip:active {
+  transform: scale(0.95);
+}
+.roundchip.off {
+  filter: grayscale(0.9);
+  opacity: 0.8;
+}
+
+.omakase-pill {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3em;
+  border-radius: 99px;
+  font-weight: 900;
+  color: #fff;
+  background: linear-gradient(180deg, #ffb35c, #f5822d);
+  border: 0.35cqw solid #fff;
+  box-shadow:
+    0 0.5cqw 0 #d8661b,
+    0 0.9cqw 1cqw rgba(120, 60, 10, 0.25);
+  text-shadow: 0 0.2cqw 0 #c25a14;
+  touch-action: manipulation;
+}
+.omakase-pill:active {
+  transform: translateY(2px);
+}
+
+/* 帽子パネル */
+.hatpanel {
+  min-height: calc(230 * 100cqw / 941);
+}
+.hatpanel-bg {
+  border-style: solid;
+  border-width: calc(70 * 100cqw / 941) calc(70 * 100cqw / 941) calc(40 * 100cqw / 941);
+  border-image: url("/art/home/hatpanel.webp") 70 70 40 fill / calc(70 * 100cqw / 941) calc(70 * 100cqw / 941) calc(40 * 100cqw / 941) stretch;
+}
+.hatgrid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 13.8cqw;
+  gap: 1.6cqw 1.3cqw;
+  align-content: start;
+  padding: 0.6cqw;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+}
+.hatgrid.multi {
+  grid-auto-flow: row;
+  grid-template-columns: repeat(auto-fill, 13.8cqw);
+  justify-content: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-snap-type: none;
+}
+.hatgrid > * {
+  scroll-snap-align: start;
+}
+.arrowbtn {
+  position: absolute;
+  top: calc(100 * 100cqw / 941);
+  display: flex;
+  width: 5.4cqw;
+  height: 5.4cqw;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(150, 150, 150, 0.75);
+  color: #fff;
+  font-size: 4.5cqw;
+  font-weight: 900;
+  line-height: 1;
+  padding-bottom: 0.5cqw;
+  box-shadow: 0 0.3cqw 0.6cqw rgba(0, 0, 0, 0.2);
+}
+
+/* 帽子カード（パネルの中） */
+.hatcard {
+  position: relative;
+  display: flex;
+  flex: 0 0 auto;
+  width: 13.8cqw;
+  height: calc(168 * 100cqw / 941);
+  flex-direction: column;
+  align-items: center;
+  border-radius: 1.8cqw;
+  background: #fffdf8;
+  border: 0.35cqw solid #ead8bd;
+  box-shadow: 0 0.5cqw 0.8cqw rgba(120, 80, 40, 0.15);
+  padding: 0.8cqw 0.6cqw 0.4cqw;
+  touch-action: manipulation;
+}
+.hatcard .thumb {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 1.2cqw;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 40%, #fff6d8, #fde9b8);
+}
+.hatcard .lbl {
+  margin-top: 0.5cqw;
+  font-weight: 900;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.hatcard.sel {
+  border: 0.6cqw solid #f08a3c;
+  background: #fff5e6;
+}
+.hatcard .check,
+.hatcard2 .check {
+  position: absolute;
+  right: -0.6cqw;
+  top: -0.6cqw;
+  display: flex;
+  width: 3.6cqw;
+  height: 3.6cqw;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #33b3d9;
+  color: #fff;
+  font-weight: 900;
+  font-size: 2.2cqw;
+  border: 0.3cqw solid #fff;
+}
+.hatcard.gift .thumb,
+.hatcard2.gift .thumb {
+  background: radial-gradient(circle at 50% 40%, #fff1d6, #ffd29a);
+}
+
+/* 下のページの部品 */
+.pagetitle {
+  font-weight: 900;
+  font-size: 1.35em;
+  color: #4a3424;
+}
+.backbtn {
+  display: flex;
+  width: 46px;
+  height: 46px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #fffaf0;
+  border: 3px solid #f3a748;
+  font-size: 1.8em;
+  font-weight: 900;
+  color: #c86a20;
+  line-height: 1;
+  padding-bottom: 4px;
+  box-shadow: 0 3px 0 rgba(150, 90, 30, 0.25);
+}
+.panel2 {
+  background-color: #fffcf4;
+  background-image: url("/art/paper.jpg");
+  background-size: 512px;
+  background-blend-mode: multiply;
+  border: 3px solid #efdcbc;
+  border-radius: 24px;
+  box-shadow: 0 5px 0 rgba(170, 120, 60, 0.18);
+}
+.h2 {
+  margin-bottom: 6px;
+  font-weight: 900;
+  font-size: 1.08em;
+  color: #4a3424;
+}
+.frame2 {
+  overflow: hidden;
+  border-radius: 22px;
+  border: 4px solid #fff;
+  box-shadow:
+    0 0 0 3px #efdcbc,
+    0 6px 10px rgba(120, 80, 40, 0.2);
+}
+
+/* つやつやボタン（参考画像の大きいボタン） */
+.gbtn {
+  display: flex;
+  min-height: 60px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3em;
+  padding: 0.3em 0.8em;
+  border-radius: 20px;
+  font-weight: 900;
+  font-size: 1.08em;
+  color: #fff;
+  text-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.22),
+    0 0 3px rgba(0, 0, 0, 0.15);
+  border: 3px solid rgba(255, 255, 255, 0.95);
+  background: linear-gradient(180deg, var(--g1), var(--g2));
+  box-shadow:
+    inset 0 -5px 0 var(--g3),
+    inset 0 4px 0 rgba(255, 255, 255, 0.35),
+    0 4px 8px rgba(120, 70, 30, 0.22);
+  touch-action: manipulation;
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+.gbtn:active {
+  transform: translateY(2px) scale(0.98);
+}
+.gbtn-sm {
+  min-height: 64px;
+  flex-direction: column;
+  gap: 0;
+  font-size: 0.92em;
+  border-radius: 18px;
+}
+.gbtn-orange {
+  --g1: #ffab4d;
+  --g2: #f47c24;
+  --g3: #d4600f;
+}
+.gbtn-green {
+  --g1: #8fd65a;
+  --g2: #4fae35;
+  --g3: #3b8d26;
+}
+.gbtn-blue {
+  --g1: #5cc2f2;
+  --g2: #2a95d8;
+  --g3: #1c76b4;
+}
+.gbtn-pink {
+  --g1: #ff8fa8;
+  --g2: #ec5a7e;
+  --g3: #c93f63;
+}
+.gbtn-purple {
+  --g1: #c69af0;
+  --g2: #9b62d8;
+  --g3: #7c45b8;
+}
+.gbtn-white {
+  --g1: #fffdf8;
+  --g2: #f6ead6;
+  --g3: #e1ccab;
+  color: #5a3a22;
+  text-shadow: none;
+}
+.gbtn.is-dim {
+  filter: saturate(0.35) brightness(1.12);
+}
+.gbtn.is-on {
+  outline: 3px solid #f6c54a;
+  outline-offset: 1px;
+}
+
+.chip2 {
+  display: flex;
+  min-height: 50px;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 4px;
+  padding: 0 14px;
+  border-radius: 99px;
+  border: 3px solid #efdcbc;
+  background: #fffcf4;
+  font-weight: 900;
+  box-shadow: 0 3px 0 rgba(170, 120, 60, 0.15);
+}
+.chip2.on {
+  background: #ffe2b8;
+  border-color: #f08a3c;
+}
+
+.hatcard2 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 18px;
+  background: #fffdf8;
+  border: 3px solid #efdcbc;
+  padding: 5px 5px 4px;
+  box-shadow: 0 3px 6px rgba(120, 80, 40, 0.14);
+  touch-action: manipulation;
+}
+.hatcard2 .thumb {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 13px;
+  background: radial-gradient(circle at 50% 40%, #fff6d8, #fde9b8);
+}
+.hatcard2 .lbl {
+  margin-top: 3px;
+  font-weight: 900;
+  font-size: 0.78em;
+  line-height: 1.2;
+  text-align: center;
+}
+.hatcard2.sel {
+  border-color: #f08a3c;
+  background: #fff3e2;
+}
+.hatcard2 .check {
+  width: 28px;
+  height: 28px;
+  font-size: 16px;
+  right: -6px;
+  top: -6px;
+}
+.hatcard2.locked .thumb {
+  background: #f4ecdf;
+}
+
+.foodcard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 16px;
+  background: #fffdf8;
+  border: 2px solid #efdcbc;
+  padding: 4px 4px 6px;
+  box-shadow: 0 3px 5px rgba(120, 80, 40, 0.12);
+}
+.foodcard .lbl {
+  font-weight: 900;
+  font-size: 0.8em;
+}
+
+.zukan2 {
+  display: flex;
+  aspect-ratio: 1 / 0.85;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: radial-gradient(circle at 50% 40%, #fffaf0, #fbecd0);
+  border: 2px solid #efdcbc;
+  overflow: hidden;
+  padding: 2px;
+}
+.zukan2.locked {
+  background: #f4ecdf;
+  border-style: dashed;
+}
+.progress2 {
+  height: 18px;
+  border-radius: 99px;
+  background: #f3e6d0;
+  overflow: hidden;
+  box-shadow: inset 0 2px 3px rgba(120, 80, 40, 0.15);
+}
+.progress2 > div {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(180deg, #8fd65a, #4fae35);
+}
+
+.gamecard2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px;
+  border-radius: 20px;
+  border: 4px solid #fff;
+  box-shadow:
+    0 0 0 2px #efdcbc,
+    0 5px 8px rgba(120, 80, 40, 0.2);
+  text-align: center;
+}
+.gamecard2.locked {
+  background: #f6eedf;
+  box-shadow: 0 0 0 2px #e6d6bb;
+}
+
+.polaroid2 {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px 8px 10px;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(90, 60, 30, 0.22);
+  text-align: center;
+}
+
+.seasoncard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  border-radius: 16px;
+  border: 3px solid #efdcbc;
+  background: #fffcf4;
+}
+.seasoncard.sel {
+  border-color: #f08a3c;
+  background: #fff1dd;
+}
+
+.linkrow {
+  display: flex;
+  min-height: 54px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-radius: 16px;
+  background: #fff;
+  border: 2px solid #cfe3f3;
+  font-weight: 900;
+}
+
+.setrow {
+  display: flex;
+  min-height: 70px;
+  align-items: center;
+  gap: 12px;
+  padding: 0 14px;
+  border-radius: 20px;
+  border: 3px solid #efdcbc;
+  background: #fffcf4;
+  box-shadow: 0 3px 0 rgba(170, 120, 60, 0.15);
+}
+.toggle2 {
+  position: relative;
+  width: 64px;
+  height: 36px;
+  border-radius: 99px;
+  background: #e2d6c4;
+  transition: background 0.2s;
+}
+.toggle2 > span {
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  transition: left 0.2s;
+}
+.toggle2.on {
+  background: #4fae35;
+}
+.toggle2.on > span {
+  left: 32px;
+}
+
+.newcard-wrap {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: calc(min(100vw, 520px) * 112 / 941 + 8px + env(safe-area-inset-top));
+  z-index: 40;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+.newcard-toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  font-size: 0.85em;
+  border-radius: 99px;
+  background: #fff;
+  border: 3px solid #e2546a;
+  font-weight: 900;
+  color: #c93f63;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+  white-space: nowrap;
+}
+
+.flash {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: #fff;
+  pointer-events: none;
+  animation: flash 0.5s ease-out both;
+}
+@keyframes flash {
+  0% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* へやの中のうごき（SVG） */
+.sensei-g,
+.sensei-bob {
+  transform-box: view-box;
+  transform-origin: 450px 1000px;
+}
+@keyframes s-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+@keyframes s-hop {
+  0% {
+    transform: translateY(0) rotate(0);
+  }
+  30% {
+    transform: translateY(-22px) rotate(-1.2deg);
+  }
+  60% {
+    transform: translateY(0) rotate(0.8deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+}
+@keyframes s-wiggle {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(-2.2deg);
+  }
+  75% {
+    transform: rotate(2.2deg);
+  }
+}
+@keyframes s-chew {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+@keyframes s-shuffle {
+  0% {
+    transform: rotate(0) scale(1);
+  }
+  40% {
+    transform: rotate(-4deg) scale(0.98);
+  }
+  70% {
+    transform: rotate(3deg) scale(1.01);
+  }
+  100% {
+    transform: rotate(0) scale(1);
+  }
+}
+.anim .sensei-bob {
+  animation: s-bob 3.6s ease-in-out infinite;
+}
+.anim .sensei-g.hop {
+  animation: s-hop 0.6s ease-out;
+}
+.anim .sensei-g.wiggle {
+  animation: s-wiggle 0.5s ease-in-out 2;
+}
+.anim .sensei-g.chew {
+  animation: s-chew 0.25s ease-in-out 5;
+}
+.anim .sensei-g.shuffle {
+  animation: s-shuffle 0.65s ease-in-out;
+}
+.fx-pop2 {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.anim .fx-pop2 {
+  animation: fx-pop 1.6s ease-out both;
+}
+.no-anim .fx-pop2 {
+  opacity: 1;
+}
+.item-sway2 {
+  transform-box: fill-box;
+  transform-origin: 50% 90%;
+}
+.anim .item-sway2 {
+  animation: sway 3s ease-in-out infinite;
+}
+.food-wiggle2 {
+  transform-box: fill-box;
+  transform-origin: 50% 90%;
+}
+.anim .food-wiggle2 {
+  animation: food-wiggle 0.5s ease-in-out;
+}
+@keyframes fly2 {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  70% {
+    transform: translate(var(--dx), var(--dy)) scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy)) scale(0.2);
+    opacity: 0;
+  }
+}
+.fly2 {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.anim .fly2 {
+  animation: fly2 0.9s ease-in both;
+}
+.no-anim .fly2 {
+  display: none;
+}
+
+.hatcard.locked .thumb {
+  background: #f4ecdf;
+}
+.hatcard.locked .lbl {
+  color: #b9a58c;
+}

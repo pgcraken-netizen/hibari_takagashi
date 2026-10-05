@@ -44,7 +44,10 @@ export type Settings = {
   animation: boolean;
   bigText: boolean;
   voiceMode: boolean; // 音声であそぶ
+  bubble: boolean; // ふきだし
 };
+
+export type Snap = Look & { season: string; date: string };
 
 export type Look = {
   hat: string;
@@ -63,6 +66,7 @@ export type SaveData = {
   omakaseCount: number;
   sinceNew: number; // 新しい帽子が出てからの回数（救済用）
   foodTaps: number;
+  album: Snap[];
   settings: Settings;
 };
 
@@ -74,6 +78,7 @@ export const DEFAULT_SETTINGS: Settings = {
   animation: true,
   bigText: false,
   voiceMode: false,
+  bubble: true,
 };
 
 const KEY = "takahashi-sensei-asobou-v1";
@@ -90,6 +95,7 @@ export function defaultSave(): SaveData {
     omakaseCount: 0,
     sinceNew: 0,
     foodTaps: 0,
+    album: [],
     settings: { ...DEFAULT_SETTINGS },
   };
 }

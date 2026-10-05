@@ -24,6 +24,15 @@
 
 ## 絵について
 
+### ゲーム画面（ホーム）
+- 参考画像 `scripts/art/home-ref.png` から、部屋・先生・テーブル・料理・ボタン・ヘッダー・ナビを切り出しています（`scripts/art/build_home.py`）。
+- 先生がいた場所や料理の下は、LaMa（big-lama）で自然に埋めています（`scripts/art/lama.py`）。必要なもの：PyTorch と重み `big-lama.pt`。
+- 夏・秋・冬の部屋は、春の部屋の窓の外と飾りの色を変えて作っています。
+- 衣装は、先生の白衣の陰影を残したまま色を塗り替えています（`scripts/art/outfits_home.py`）。
+- 帽子は `scripts/art/plushify.py` でフェルトのように立体的に見せています（`public/art/hat3d`）。ひまわりの帽子は、参考画像のものをそのまま使っています。
+
+### タイトル・その他
+
 - **タイトル画面**：キービジュアル（`scripts/art/keyvisual.png`）をそのまま使い、ボタンの位置にタップ領域を重ねています。
 - **高橋先生**：キービジュアルから顔と手を切り出しています（`scripts/art/extract_sensei.py`）。その上に、帽子と衣装の絵を重ねています。
 - **部屋・テーブル・ごはん・衣装・帽子（110）・アイコン**：`scripts/art/studio.html` で、クレヨンと水彩のタッチ（SVGフィルター）で描いています。モチーフには Noto Emoji のベクター（Apache-2.0）を、フェルトや水彩風に加工して使っています。
